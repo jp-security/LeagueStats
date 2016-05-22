@@ -1,0 +1,16 @@
+<html>
+  <head>
+    {% if title %}
+    <title> {{ title }} - Cag NFL Stats</title>
+    {% else %}
+    <title>CAG NFL Stats</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>Site:
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('stats') }}">stats</a>
+    </div>
+    {% block content %}{% endblock %}
+  </body>
+</html>

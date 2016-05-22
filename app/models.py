@@ -4,6 +4,7 @@ class Teams(db.Model):
     __tablename__ = 'teams'
 
     id = db.Column(db.Integer, primary_key=True)
+    team_owner = db.Column(db.String(256))
     team_city = db.Column(db.String(256))
     team_name = db.Column(db.String(256))
 
@@ -19,6 +20,7 @@ class Games(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     home_team = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    home_score = db.Column(db.Integer)
     home_total_yards = db.Column(db.Integer)
     home_passing_yards = db.Column(db.Integer)
     home_rushing_yards = db.Column(db.Integer)
@@ -26,6 +28,7 @@ class Games(db.Model):
     home_qbr = db.Column(db.Float)
 
     away_team = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    away_score = db.Column(db.Integer)
     away_total_yards = db.Column(db.Integer)
     away_passing_yards = db.Column(db.Integer)
     away_rushing_yards = db.Column(db.Integer)
@@ -36,7 +39,14 @@ class Games(db.Model):
     away = db.relationship('Teams', lazy='joined', foreign_keys='Games.away_team', backref='game_asaway')
 
     def __repr__(self):
-        return ('<Home Team - %r: Total Yards - %r Passing Yards - %r Rushing Yards - %r Tunrovers - %r QBR - %r> '
+        if self.home_score > self.away_score:
+            final = str(self.home) + ' defeats ' + str(self.away) + ' ' + str(self.home_score) + ' to ' + str(self.away_score)
+        else:
+            final = str(self.away) + ' defeats ' + str(self.home) + ' ' + str(self.away_score) + ' to ' + str(self.home_score)
+
+        return ('%r \n'
+                '<Home Team - %r: Total Yards - %r Passing Yards - %r Rushing Yards - %r Tunrovers - %r QBR - %r>\n'
                 '<Away Team - %r: Total Yards - %r Passing Yards - %r Rushing Yards - %r Tunrovers - %r QBR - %r>'
-                % (self.home, self.home_total_yards, self.home_passing_yards, self.home_rushing_yards, self.home_turn_overs, self.home_qbr
+                % (final
+                , self.home, self.home_total_yards, self.home_passing_yards, self.home_rushing_yards, self.home_turn_overs, self.home_qbr
                 , self.away, self.away_total_yards, self.away_passing_yards, self.away_rushing_yards, self.away_turn_overs, self.away_qbr))
