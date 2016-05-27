@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect
 from app import app, models
 
+active_week = "active"
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -14,6 +16,7 @@ def games():
     return render_template('games.html',
                             title="Games",
                             week=week,
+                            active_week=active_week,
                             games=games)
 
 @app.route('/games/week1')
@@ -23,6 +26,7 @@ def week1():
     return render_template('games.html',
                             title="Games",
                             week=week,
+                            active_week1=active_week,
                             games=games)
 
 @app.route('/games/week2')
@@ -32,6 +36,7 @@ def week2():
     return render_template('games.html',
                             title="Games",
                             week=week,
+                            active_week2=active_week,
                             games=games)
 
 @app.route('/games/week3')
@@ -41,6 +46,7 @@ def week3():
     return render_template('games.html',
                             title="Games",
                             week=week,
+                            active_week3=active_week,
                             games=games)
 
 @app.route('/games/week4')
@@ -50,6 +56,7 @@ def week4():
     return render_template('games.html',
                             title="Games",
                             week=week,
+                            active_week4=active_week,
                             games=games)
 
 @app.route('/games/week5')
@@ -59,6 +66,7 @@ def week5():
     return render_template('games.html',
                             title="Games",
                             week=week,
+                            active_week5=active_week,
                             games=games)
 
 @app.route('/games/week6')
@@ -68,6 +76,7 @@ def week6():
     return render_template('games.html',
                             title="Games",
                             week=week,
+                            active_week6=active_week,
                             games=games)
 
 @app.route('/games/week7')
@@ -77,6 +86,7 @@ def week7():
     return render_template('games.html',
                             title="Games",
                             week=week,
+                            active_week7=active_week,
                             games=games)
 
 @app.route('/games/week8')
@@ -86,6 +96,7 @@ def week8():
     return render_template('games.html',
                             title="Games",
                             week=week,
+                            active_week8=active_week,
                             games=games)
 
 @app.route('/stats')
@@ -93,6 +104,11 @@ def stats():
 
     return render_template('stats.html',
                             title="Stats")
+
+@app.route('/teams')
+def teams():
+
+    return render_template('teams.html')
 
 @app.errorhandler(404)
 def not_found_error(error):

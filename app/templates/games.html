@@ -3,15 +3,15 @@
 {% block content %}
 <nav class="navbar navbar-inverse" role="navigation">
   <ul class="nav nav-pills" id="week">
-    {{ nav_link('games', 'All Games') }}
-    {{ nav_link('week1', 'Week 1') }}
-    {{ nav_link('week2', 'Week 2') }}
-    {{ nav_link('week3', 'Week 3') }}
-    {{ nav_link('week4', 'Week 4') }}
-    {{ nav_link('week5', 'Week 5') }}
-    {{ nav_link('week6', 'Week 6') }}
-    {{ nav_link('week7', 'Week 7') }}
-    {{ nav_link('week8', 'Week 8') }}
+    <li class="{{ active_week }}"><a href="{{ url_for('games') }}">Games</a></li>
+    <li class="{{ active_week1 }}"><a href="{{ url_for('week1') }}">Week 1</a></li>
+    <li class="{{ active_week2 }}"><a href="{{ url_for('week2') }}">Week 2</a></li>
+    <li class="{{ active_week3 }}"><a href="{{ url_for('week3') }}">Week 3</a></li>
+    <li class="{{ active_week4 }}"><a href="{{ url_for('week4') }}">Week 4</a></li>
+    <li class="{{ active_week5 }}"><a href="{{ url_for('week5') }}">Week 5</a></li>
+    <li class="{{ active_week6 }}"><a href="{{ url_for('week6') }}">Week 6</a></li>
+    <li class="{{ active_week7 }}"><a href="{{ url_for('week7') }}">Week 7</a></li>
+    <li class="{{ active_week8 }}"><a href="{{ url_for('week8') }}">Week 8</a></li>
   </ul>
 </nav>
 
@@ -47,6 +47,5 @@
           </table>
         </div>
       </div>
-<br><br><br><br>
 {% endfor %}
 {% endblock %}
