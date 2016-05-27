@@ -19,16 +19,16 @@ away_qbr = raw_input('Enter the Away Team QBR: ')
 home_team
 home_team = models.Teams.query.filter_by(team_name=home_team).all()
 for h in home_team:
-    home_team = int(h.id)
+    home_team_id = int(h.id)
 
 away_team = models.Teams.query.filter_by(team_name=away_team).all()
 for a in away_team:
-    away_team = int(a.id)
+    away_team_id = int(a.id)
 
 game_stats = {
 'week': week,
-'home_team': home_team,
-'away_team': away_team,
+'home_team': home_team_id,
+'away_team': away_team_id,
 'home_score': home_score,
 'away_score': away_score,
 'home_total_yards': home_total_yards,
@@ -43,6 +43,22 @@ game_stats = {
 'away_qbr': away_qbr
 }
 
+if home_score > away_score:
+    for h in home_team:
+        h.team_wins = h.team_wins + 1
+
+    for a in away_team:
+        a.team_losses = a.team_losses + 1
+
+else:
+    for h in home_team:
+        h.team_losses = h.team_losses + 1
+
+    for a in away_team:
+        a.team_wins = a.team_wins + 1
+
 game = models.Games(**game_stats)
 db.session.add(game)
+db.session.add(h)
+db.session.add(a)
 db.session.commit()
