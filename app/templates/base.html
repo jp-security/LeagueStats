@@ -1,3 +1,4 @@
+{% from "macros.html" import nav_link with context %}
 <html>
   <head>
     {% if title %}
@@ -5,12 +6,58 @@
     {% else %}
     <title>CAG NFL Stats</title>
     {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      .navbar
+      {
+        margin-bottom: 0px !important;
+      }
+      .panel-heading
+      {
+        text-align: center;
+        font-weight: bold;
+        font-size: 16pt;
+      }
+      .table
+      {
+        text-align: center;
+      }
+      table.auto
+      {
+        table-layout: auto;
+        text-align: center;
+      }
+      th
+      {
+        text-align: center;
+      }
+      .center
+      {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
   </head>
   <body>
-    <div>Site:
-      <a href="{{ url_for('index') }}">Home</a>
-      <a href="{{ url_for('stats') }}">stats</a>
-    </div>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <p class="navbar-text">CAG Stats</p>
+        </div>
+
+        <div>
+          <ul class="nav navbar-nav">
+            {{ nav_link('home', 'Home') }}
+            {{ nav_link('stats', 'Stats') }}
+            {{ nav_link('games', 'Games') }}
+          </ul>
+        </div>
+      </div>
+    </nav>
     {% block content %}{% endblock %}
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -43,9 +43,9 @@ class Games(db.Model):
 
     def __repr__(self):
         if self.home_score > self.away_score:
-            final = str(self.home) + ' defeats ' + str(self.away) + ' ' + str(self.home_score) + ' to ' + str(self.away_score)
+            final = str(self.home.team_name) + ' defeats ' + str(self.away.team_name) + ' ' + str(self.home_score) + ' to ' + str(self.away_score)
         else:
-            final = str(self.away) + ' defeats ' + str(self.home) + ' ' + str(self.away_score) + ' to ' + str(self.home_score)
+            final = str(self.away.team_name) + ' defeats ' + str(self.home.team_name) + ' ' + str(self.away_score) + ' to ' + str(self.home_score)
 
         return ('%r \n'
                 '<Home Team - %r: Total Yards - %r Passing Yards - %r Rushing Yards - %r Tunrovers - %r QBR - %r>\n'

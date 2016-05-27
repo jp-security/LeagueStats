@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% from "macros.html" import nav_link with context %}
+{% block content %}
+<nav class="navbar navbar-inverse" role="navigation">
+  <ul class="nav nav-pills" id="week">
+    {{ nav_link('games', 'All Games') }}
+    {{ nav_link('week1', 'Week 1') }}
+    {{ nav_link('week2', 'Week 2') }}
+    {{ nav_link('week3', 'Week 3') }}
+    {{ nav_link('week4', 'Week 4') }}
+    {{ nav_link('week5', 'Week 5') }}
+    {{ nav_link('week6', 'Week 6') }}
+    {{ nav_link('week7', 'Week 7') }}
+    {{ nav_link('week8', 'Week 8') }}
+  </ul>
+</nav>
+
+{% if week == 'All' %}
+  <h1>All Games</h1>
+{% else %}
+  <h1>Week {{ week }} Games</h1>
+{% endif %}
+<br>
+  {% for game in games %}
+    <div class="pannel panel-default col-md-5">
+      <div class="panel-heading">
+        {% if game.home_score > game.away_score: %}
+            {{ game.home.team_name }} defeats {{ game.away.team_name }} {{ game.home_score }} to {{ game.away_score }}
+        {% else %}
+            {{ game.away.team_name }} defeats {{ game.home.team_name }} {{ game.away_score }} to {{ game.home_score }}
+        {% endif %}
+      </div>
+      <div class="panel-body col-md-12 center">
+        <table class="table table-lined auto">
+            <thead>
+                <tr><th>{{ game.away.team_name }} - {{ game.away_score }}</th><th>Stats</th><th>{{ game.home.team_name }} - {{ game.home_score }}</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>{{ game.away_total_yards }}</td><td>Total Yards</td><td>{{ game.home_total_yards }}</td></tr>
+                <tr><td>{{ game.away_passing_yards }}</td><td>Passing Yards</td><td>{{ game.home_passing_yards }}</td></tr>
+                <tr><td>{{ game.away_rushing_yards }}</td><td>Rushing Yards</td><td>{{ game.home_rushing_yards }}</td></tr>
+                <tr><td>{{ game.away_turn_overs }}</td><td>Turnovers</td><td>{{ game.home_turn_overs }}</td></tr>
+                <tr><td>{{ game.away_qbr }}</td><td>QBR</td><td>{{ game.home_qbr }}</td></tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+<br><br><br><br>
+{% endfor %}
+{% endblock %}
