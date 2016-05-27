@@ -15,11 +15,13 @@
   </ul>
 </nav>
 
+<div class="page-header text-center">
 {% if week == 'All' %}
   <h1>All Games</h1>
 {% else %}
   <h1>Week {{ week }} Games</h1>
 {% endif %}
+</div>
 <br>
   {% for game in games %}
     <div class="pannel panel-default col-md-5">
