@@ -53,9 +53,9 @@
 
         <div>
           <ul class="nav navbar-nav">
-            {{ nav_link('home', 'Home') }}
-            {{ nav_link('stats', 'Stats') }}
-            {{ nav_link('games', 'Games') }}
+            <li class="{% block home %}{% endblock %}"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="{% block stats %}{% endblock %}"><a href="{{ url_for('stats') }}">Stats</a></li>
+            <li class="{% block games %}{% endblock %}"><a href="{{ url_for('games') }}">Games</a></li>
           </ul>
         </div>
       </div>
