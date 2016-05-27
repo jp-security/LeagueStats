@@ -14,7 +14,7 @@ class Teams(db.Model):
     away = db.relationship('Games', lazy='joined', foreign_keys='Games.away_team', backref='away_game')
 
     def __repr__(self):
-        return '<%r %r %r %r %r %r>' % (self.id, self.team_owner, self.team_city, self.team_name, self.team_wins, self.team_losses)
+        return '<%r %r %r %r %r %r>' % (self.id, str(self.team_owner), str(self.team_city), str(self.team_name), int(self.team_wins), int(self.team_losses))
         #return '<%r %r>' % (self.home, self.away)
 
 class Games(db.Model):

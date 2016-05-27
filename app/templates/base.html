@@ -53,6 +53,7 @@
         <div>
           <ul class="nav navbar-nav">
             <li class="{% block home %}{% endblock %}"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="{% block standings %}{% endblock %}"><a href="{{ url_for('standings') }}">Standings</a></li>
             <li class="{% block stats %}{% endblock %}"><a href="{{ url_for('stats') }}">Stats</a></li>
             <li class="{% block games %}{% endblock %}"><a href="{{ url_for('games') }}">Games</a></li>
           </ul>
