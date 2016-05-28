@@ -7,7 +7,7 @@
   </thead>
   {% for team in teams | sort(attribute='team_wins', reverse=True) %}
   <tbody>
-    <tr><td>{{ team.team_name }}</td><td>{{ team.team_wins }}</td><td>{{ team.team_losses }}</td></tr>
+    <tr><td>{{ team.team_owner }}</td><td>{{ team.team_name }}</td><td>{{ team.team_wins }}</td><td>{{ team.team_losses }}</td></tr>
   </tbody>
   {% endfor %}
 </table>
