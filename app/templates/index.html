@@ -1,7 +1,41 @@
 {% extends "base.html" %}
 {% block home %}active{% endblock %}
 {% block content %}
-  <h1>Welcome to CAG Stats</h1>
-  <h2>The home of the stats for the CAG NFL</h2>
-  <h2><a href="http://www.cagnfl.com">CAG NFL</a></h2>
+<div class="pannel panel-default col-md-12">
+  <div class="panel-heading">
+    <h1 class="text-center">CAG Stats</h1>
+    <h2 class="text-center">The home of the stats for the CAG NFL</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <h1 class="text-center">CAG Champion</h1>
+      <h1 class="text-center">Dazzo0007</h1>
+      <img src="/static/Cag-Champion-Roster.jpeg" class="img-responsive" id="champion" onmouseover="" style="cursor: pointer;">
+      <br>
+      <h1 class="text-center">Previous Champions</h1>
+      <img src="/static/DazzoTrophyWall.png" class="img-responsive">
+    </div>
+    <div class="col-md-6">
+      <h1 class="text-center">Schedule</h1>
+      <h3 class="text-center">Week 1</h3>
+      <h3 class="text-center">Week 2</h3>
+      <h3 class="text-center">Week 3</h3>
+      <h3 class="text-center">Week 4</h3>
+      <h3 class="text-center">Week 5</h3>
+      <h3 class="text-center">Week 6</h3>
+      <h3 class="text-center">Week 7</h3>
+      <h3 class="text-center">Week 8</h3>
+    </div>
+    <div class="col-md-3">
+      <h1 class="text-center">Helpful Links</h1>
+      <h2 class="text-center"><a href="http://gamingworldforums.com/discuss/index.php?/forum/900-all-pro-football/">CAG NFL</a></h2>
+      <h2 class="text-center"><a href="http://www.scheduleague.com/xlv">Schedule</a></h2>
+    </div>
+  </div>
+</div>
+<script>
+$("#champion").click(function() {
+  $.colorbox({href:"/static/Cag-Champion-Roster.jpeg"});
+});
+</script>
 {% endblock %}
