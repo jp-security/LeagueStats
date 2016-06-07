@@ -56,7 +56,7 @@ else:
     for a in away_team:
         a.team_wins = a.team_wins + 1
 
-home_stats = models.TeamStats.query.filter_by(team=home_team_id).all()
+home_stats = models.TeamStats.query.filter_by(team_id=home_team_id).all()
 for hstats in home_stats:
     hstats.games_played = hstats.games_played + 1
     hstats.total_yards = hstats.total_yards + int(home_total_yards)
@@ -65,7 +65,7 @@ for hstats in home_stats:
     hstats.turnovers = hstats.turnovers + int(home_turn_overs)
     hstats.qbr = (hstats.qbr + float(home_qbr)) / 2
 
-away_stats = models.TeamStats.query.filter_by(team=away_team_id).all()
+away_stats = models.TeamStats.query.filter_by(team_id=away_team_id).all()
 for astats in away_stats:
     astats.games_played = astats.games_played + 1
     astats.total_yards = astats.total_yards + int(away_total_yards)
