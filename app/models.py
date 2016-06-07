@@ -53,3 +53,20 @@ class Games(db.Model):
                 % (final
                 , self.home, self.home_total_yards, self.home_passing_yards, self.home_rushing_yards, self.home_turn_overs, self.home_qbr
                 , self.away, self.away_total_yards, self.away_passing_yards, self.away_rushing_yards, self.away_turn_overs, self.away_qbr))
+
+class TeamStats(db.Model):
+    __tablename__ = 'teamstats'
+    id = db.Column(db.Integer, primary_key=True)
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    team_name = db.Column(db.String(256))
+    games_played = db.Column(db.Integer)
+
+    total_yards = db.Column(db.Integer)
+    passing_yards = db.Column(db.Integer)
+    rushing_yards = db.Column(db.Integer)
+    turnovers = db.Column(db.Integer)
+    qbr = db.Column(db.Float)
+
+    def __repr__(self):
+        return ('Team: %r - Games Played: %r - Total Yards: %r - Passing Yards: %r - Rushing Yards: %r - Turnovers: %r - QBR: %r'
+                % (self.team, self.games_played, self.total_yards, self.passing_yards, self.rushing_yards, self.turnovers, self.qbr))
