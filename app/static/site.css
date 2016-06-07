@@ -7,10 +7,12 @@
   text-align: center;
   font-weight: bold;
   font-size: 16pt;
+  background-color: #f1e9d2!important;
 }
 .table
 {
   text-align: center;
+  background-color: #f1e9d2;
 }
 table.auto
 {
@@ -33,4 +35,17 @@ th
 .text-right
 {
   text-align: right;
+}
+.bg
+{
+  background: url(/static/Cag-Field.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+h1, h2, h3
+{
+  color: black;
+}
+.divbg
+{
+  background-color: #f1e9d2;
 }

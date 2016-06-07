@@ -101,7 +101,9 @@ def week8():
 
 @app.route('/stats')
 def stats():
+    stats = models.TeamStats.query.all()
     return render_template('stats.html',
+                            stats=stats,
                             title="Stats")
 
 @app.route('/standings')

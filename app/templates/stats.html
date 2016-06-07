@@ -1,2 +1,16 @@
 {% extends "base.html" %}
-{% block stats %}active{% endblock %}
+{% block standings %}active{% endblock %}
+{% block content %}
+<div class="col-md-8 col-md-offset-2 divbg">
+  <table class="table table-lined">
+    <thead>
+      <tr><th>Team</th><th>Games Played</th><th>Total Yards</th><th>Passing Yards</th><th>Rushing Yards</th><th>Turnovers</th><th>QBR</th></tr>
+    </thead>
+    {% for team in stats | sort(attribute='total_yards', reverse=True) %}
+    <tbody>
+      <tr><td>{{ team.team_name }}</td><td>{{ team.games_played }}</td><td>{{ team.total_yards }}</td><td>{{ team.passing_yards }}</td><td>{{ team.rushing_yards }}</td><td>{{ team.turnovers }}</td><td>{{ team.qbr }}</td></tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

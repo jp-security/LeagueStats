@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block standings %}active{% endblock %}
 {% block content %}
-<table class="table table-lined">
-  <thead>
-    <tr><th>Team Owner</th><th>Team Name</th><th>Wins</th><th>Losses</th></tr>
-  </thead>
-  {% for team in teams | sort(attribute='team_wins', reverse=True) %}
-  <tbody>
-    <tr><td>{{ team.team_owner }}</td><td>{{ team.team_name }}</td><td>{{ team.team_wins }}</td><td>{{ team.team_losses }}</td></tr>
-  </tbody>
-  {% endfor %}
-</table>
+<div class="col-md-8 col-md-offset-2 divbg">
+  <table class="table table-lined">
+    <thead>
+      <tr><th>Team Owner</th><th>Team Name</th><th>Wins</th><th>Losses</th></tr>
+    </thead>
+    {% for team in teams | sort(attribute='team_wins', reverse=True) %}
+    <tbody>
+      <tr><td>{{ team.team_owner }}</td><td>{{ team.team_name }}</td><td>{{ team.team_wins }}</td><td>{{ team.team_losses }}</td></tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
 {% endblock %}
