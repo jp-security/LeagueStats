@@ -2,15 +2,31 @@
 {% block standings %}active{% endblock %}
 {% block content %}
 <div class="col-md-8 col-md-offset-2 divbg">
-  <table class="table table-lined">
+  <table class="table table-lined" id="stats">
     <thead>
-      <tr><th>Team Owner</th><th>Team Name</th><th>Wins</th><th>Losses</th></tr>
-    </thead>
-    {% for team in teams | sort(attribute='team_wins', reverse=True) %}
-    <tbody>
-      <tr><td>{{ team.team_owner }}</td><td>{{ team.team_name }}</td><td>{{ team.team_wins }}</td><td>{{ team.team_losses }}</td></tr>
-    </tbody>
-    {% endfor %}
+      <th class="sorting">Team Owner</th>
+      <th class="sorting">Team Name</th>
+      <th class="sorting">Wins</th>
+      <th class="sorting">Losses</th>
   </table>
+
+  <script>
+  $.get('./raw/standings').done(function(standings){
+    var data = JSON.parse(standings)
+
+    $('#stats').DataTable( {
+      order: [[ 2, 'desc' ], [3, 'asc']],
+      paging: false,
+      data: data,
+      "aoColumns": [
+        { 'mData': "owner" },
+        { 'mData': "team" },
+        { 'mData': "wins" },
+        { 'mData': "losses" }
+      ]
+    });
+  });
+
+  </script>
 </div>
 {% endblock %}

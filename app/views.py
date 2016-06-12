@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect
 from app import app, models
+import json
 
 active_week = "active"
 
@@ -106,11 +107,22 @@ def stats():
                             stats=stats,
                             title="Stats")
 
+@app.route('/raw/standings')
+def standings_json():
+    teams = models.Teams.query.all()
+
+    dataSet = []
+
+    for team in teams:
+        team_data = {'owner': team.team_owner, 'team': team.team_name, 'wins': team.team_wins, 'losses': team.team_losses}
+        dataSet.append(team_data)
+
+    return json.dumps(dataSet)
+
 @app.route('/standings')
 def standings():
-    teams = models.Teams.query.all()
+    #teams = models.Teams.query.all()
     return render_template('standings.html',
-                            teams=teams,
                             title="Standings")
 
 @app.route('/teams')
