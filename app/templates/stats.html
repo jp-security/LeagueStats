@@ -2,15 +2,38 @@
 {% block stats %}active{% endblock %}
 {% block content %}
 <div class="col-md-8 col-md-offset-2 divbg">
-  <table class="table table-lined">
+  <table class="table table-lined" id="stats">
     <thead>
-      <tr><th>Team</th><th>Games Played</th><th>Total Yards</th><th>Passing Yards</th><th>Rushing Yards</th><th>Turnovers</th><th>QBR</th></tr>
+      <th class="sortable">Team</th>
+      <th class="sortable">Games Played</th>
+      <th class="sortable">Total Yards</th>
+      <th class="sortable">Passing Yards</th>
+      <th class="sortable">Rushing Yards</th>
+      <th class="sortable">Turnovers</th>
+      <th class="sortable">QBR</th>
     </thead>
-    {% for team in stats | sort(attribute='total_yards', reverse=True) %}
-    <tbody>
-      <tr><td>{{ team.team_name }}</td><td>{{ team.games_played }}</td><td>{{ team.total_yards }}</td><td>{{ team.passing_yards }}</td><td>{{ team.rushing_yards }}</td><td>{{ team.turnovers }}</td><td>{{ team.qbr }}</td></tr>
-    </tbody>
-    {% endfor %}
   </table>
+
+  <script>
+  $.get('./raw/stats').done(function(stats){
+    var data = JSON.parse(stats)
+
+    console.dir(stats)
+    $('#stats').DataTable( {
+      order: [[ 2, 'desc' ]],
+      paging: false,
+      data: data,
+      "aoColumns": [
+        { 'mData': "team" },
+        { 'mData': "games" },
+        { 'mData': "totalyards" },
+        { 'mData': "passingyards" },
+        { 'mData': "rushingyards" },
+        { 'mData': "turnovers" },
+        { 'mData': "qbr" }
+      ]
+    });
+  });
+  </script>
 </div>
 {% endblock %}

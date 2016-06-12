@@ -2,7 +2,7 @@
 {% block standings %}active{% endblock %}
 {% block content %}
 <div class="col-md-8 col-md-offset-2 divbg">
-  <table class="table table-lined" id="stats">
+  <table class="table table-lined" id="standings">
     <thead>
       <th class="sorting">Team Owner</th>
       <th class="sorting">Team Name</th>
@@ -14,7 +14,7 @@
   $.get('./raw/standings').done(function(standings){
     var data = JSON.parse(standings)
 
-    $('#stats').DataTable( {
+    $('#standings').DataTable( {
       order: [[ 2, 'desc' ], [3, 'asc']],
       paging: false,
       data: data,
@@ -26,7 +26,6 @@
       ]
     });
   });
-
   </script>
 </div>
 {% endblock %}
