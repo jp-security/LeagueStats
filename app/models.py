@@ -7,6 +7,7 @@ class Teams(db.Model):
     team_owner = db.Column(db.String(256))
     team_city = db.Column(db.String(256))
     team_name = db.Column(db.String(256))
+    division = db.Column(db.String(256))
     team_wins = db.Column(db.Integer)
     team_losses = db.Column(db.Integer)
 
@@ -14,7 +15,7 @@ class Teams(db.Model):
     away = db.relationship('Games', lazy='joined', foreign_keys='Games.away_team', backref='away_game')
 
     def __repr__(self):
-        return '<%r %r %r %r %r %r>' % (self.id, str(self.team_owner), str(self.team_city), str(self.team_name), int(self.team_wins), int(self.team_losses))
+        return '<%r %r %r %r %r %r %r>' % (self.id, self.team_owner, self.team_city, self.team_name, self.division, self.team_wins, self.team_losses)
         #return '<%r %r>' % (self.home, self.away)
 
 class Games(db.Model):
@@ -54,18 +55,39 @@ class Games(db.Model):
                 , self.home, self.home_total_yards, self.home_passing_yards, self.home_rushing_yards, self.home_turn_overs, self.home_qbr
                 , self.away, self.away_total_yards, self.away_passing_yards, self.away_rushing_yards, self.away_turn_overs, self.away_qbr))
 
-class TeamStats(db.Model):
-    __tablename__ = 'teamstats'
+class OffenseTeamStats(db.Model):
+    __tablename__ = 'offenseteamstats'
     id = db.Column(db.Integer, primary_key=True)
     team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
     team_name = db.Column(db.String(256))
     games_played = db.Column(db.Integer)
+    no_stats_game = db.Column(db.Integer)
+    points_scored = db.Column(db.Integer)
 
     total_yards = db.Column(db.Integer)
     passing_yards = db.Column(db.Integer)
     rushing_yards = db.Column(db.Integer)
     turnovers = db.Column(db.Integer)
     qbr = db.Column(db.Float)
+
+    def __repr__(self):
+        return ('Team: %r - Games Played: %r - Total Yards: %r - Passing Yards: %r - Rushing Yards: %r - Turnovers: %r - QBR: %r'
+                % (self.team, self.games_played, self.total_yards, self.passing_yards, self.rushing_yards, self.turnovers, self.qbr))
+
+class DefenseTeamStats(db.Model):
+    __tablename__ = 'defenseteamstats'
+    id = db.Column(db.Integer, primary_key=True)
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    team_name = db.Column(db.String(256))
+    games_played = db.Column(db.Integer)
+    no_stats_game = db.Column(db.Integer)
+    points_allowed = db.Column(db.Integer)
+
+    total_yards_against = db.Column(db.Integer)
+    passing_yards_against = db.Column(db.Integer)
+    rushing_yards_against = db.Column(db.Integer)
+    turnovers_forced = db.Column(db.Integer)
+    opposing_qbr = db.Column(db.Float)
 
     def __repr__(self):
         return ('Team: %r - Games Played: %r - Total Yards: %r - Passing Yards: %r - Rushing Yards: %r - Turnovers: %r - QBR: %r'
