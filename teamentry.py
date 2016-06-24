@@ -5,7 +5,7 @@ teams = [
 {'team_owner': 'tjspeaks',          'team_city': 'Baltimore',       'team_name': 'Ravens',          'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
 {'team_owner': 'Aquick Assasin',    'team_city': 'Cleveland',       'team_name': 'Browns',          'division': 'Navy',      'team_wins': '0', 'team_losses': '0'},
 {'team_owner': 'MightyRx',          'team_city': 'San Diego',       'team_name': 'Chargers',        'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
-{'team_owner': 'RebelRouser1988',   'team_city': 'Tampa Bay',       'team_name': 'Buccanneers',     'division': 'Navy',      'team_wins': '0', 'team_losses': '0'},
+{'team_owner': 'RebelRouser1988',   'team_city': 'Tampa Bay',       'team_name': 'Buccaneers',     'division': 'Navy',      'team_wins': '0', 'team_losses': '0'},
 {'team_owner': 'Dazzo47',           'team_city': 'Chicago',         'team_name': 'Bears',           'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
 {'team_owner': 'SitnHereFlossin',   'team_city': 'Cincinnati',      'team_name': 'Bengals',         'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
 {'team_owner': 'Pcat Magoo',        'team_city': 'Kansas City',     'team_name': 'Chiefs',          'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},

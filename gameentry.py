@@ -1,5 +1,6 @@
 from app import models, db
 
+no_stats = raw_input('No Stats Mode: ')
 week = raw_input('Enter the week of the game: ')
 
 home_team = raw_input('Enter the Home Team: ')
@@ -9,7 +10,6 @@ away_team = raw_input('Enter the Away Team: ')
 away_score = raw_input('Enter the Away Team Score: ')
 
 winning_team = raw_input('Which Team Won [home/away]: ')
-no_stats = raw_input('No Stats Mode: ')
 
 home_team = models.Teams.query.filter_by(team_name=home_team).all()
 for h in home_team:

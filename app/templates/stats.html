@@ -1,39 +1,129 @@
 {% extends "base.html" %}
 {% block stats %}active{% endblock %}
 {% block content %}
-<div class="col-md-8 col-md-offset-2 divbg">
-  <table class="table table-lined" id="stats">
-    <thead>
-      <th class="sortable">Team</th>
-      <th class="sortable">Games Played</th>
-      <th class="sortable">Total Yards</th>
-      <th class="sortable">Passing Yards</th>
-      <th class="sortable">Rushing Yards</th>
-      <th class="sortable">Turnovers</th>
-      <th class="sortable">QBR</th>
-    </thead>
-  </table>
-
-  <script>
-  $.get('./raw/stats').done(function(stats){
-    var data = JSON.parse(stats)
-
-    console.dir(stats)
-    $('#stats').DataTable( {
-      order: [[ 2, 'desc' ]],
-      paging: false,
-      data: data,
-      "aoColumns": [
-        { 'mData': "team" },
-        { 'mData': "games" },
-        { 'mData': "totalyards" },
-        { 'mData': "passingyards" },
-        { 'mData': "rushingyards" },
-        { 'mData': "turnovers" },
-        { 'mData': "qbr" }
-      ]
-    });
-  });
-  </script>
-</div>
+  <div class="well">
+    <h1 class="text-center" style="color: #F1E9D2;">League Leaders on Offense and Defense</h1>
+  </div>
+  <br>
+  <div class="pannel panel-default col-md-2 col-md-offset-1">
+    <div class="panel-heading">
+      <p class="divbgtext">Total Yards</p>
+    </div>
+    <table class="table table-lined auto">
+      {% for stat in total_yards %}
+      <tbody>
+        <tr><td>{{ stat.team_name }}</td><td>{{ stat.total_yards }}</td></tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="pannel panel-default col-md-2">
+    <div class="panel-heading">
+      <p class="divbgtext">Passing Yards</p>
+    </div>
+      <table class="table table-lined auto">
+        {% for stat in passing_yards %}
+        <tbody>
+          <tr><td>{{ stat.team_name }}</td><td>{{ stat.passing_yards }}</td></tr>
+        </tbody>
+        {% endfor %}
+      </table>
+  </div>
+  <div class="pannel panel-default col-md-2">
+    <div class="panel-heading">
+      <p class="divbgtext">Rushing Yards</p>
+    </div>
+      <table class="table table-lined" id="rushing_yards">
+        {% for stat in rushing_yards %}
+        <tbody>
+          <tr><td>{{ stat.team_name }}</td><td>{{ stat.rushing_yards }}</td></tr>
+        </tbody>
+        {% endfor %}
+      </table>
+  </div>
+  <div class="pannel panel-default col-md-2">
+    <div class="panel-heading">
+      <p class="divbgtext">Turnovers</p>
+    </div>
+    <table class="table table-lined" id="turnovers">
+      {% for stat in turnovers %}
+      <tbody>
+        <tr><td>{{ stat.team_name }}</td><td>{{ stat.turnovers }}</td></tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="pannel panel-default col-md-2">
+    <div class="panel-heading">
+      <p class="divbgtext">QBR</p>
+    </div>
+    <table class="table table-lined" id="qbr">
+      {% for stat in qbr %}
+      <tbody>
+        <tr><td>{{ stat.team_name }}</td><td>{{ stat.qbr }}</td></tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  <br/><br/><br/>
+  <div class="pannel panel-default col-md-2 col-md-offset-1">
+    <div class="panel-heading">
+      <p class="divbgtext">Yards Allowed</p>
+    </div>
+    <table class="table table-lined" id="total_yards_allowed">
+      {% for stat in total_yards_allowed %}
+      <tbody>
+        <tr><td>{{ stat.team_name }}</td><td>{{ stat.total_yards_against }}</td></tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="pannel panel-default col-md-2">
+    <div class="panel-heading">
+      <p class="divbgtext">Passing Yards Allowed</p>
+    </div>
+    <table class="table table-lined" id="passing_yards_allowed">
+      {% for stat in passing_yards_allowed %}
+      <tbody>
+        <tr><td>{{ stat.team_name }}</td><td>{{ stat.passing_yards_against }}</td></tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="pannel panel-default col-md-2">
+    <div class="panel-heading">
+      <p class="divbgtext">Rushing Yards Allowed</p>
+    </div>
+    <table class="table table-lined" id="rushing_yards_allowed">
+      {% for stat in rushing_yards_allowed %}
+      <tbody>
+        <tr><td>{{ stat.team_name }}</td><td>{{ stat.rushing_yards_against }}</td></tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="pannel panel-default col-md-2">
+    <div class="panel-heading">
+      <p class="divbgtext">Turnovers Forced</p>
+    </div>
+    <table class="table table-lined" id="turnovers_forced">
+      {% for stat in turnovers_forced %}
+      <tbody>
+        <tr><td>{{ stat.team_name }}</td><td>{{ stat.turnovers_forced }}</td></tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="pannel panel-default col-md-2">
+    <div class="panel-heading">
+      <p class="divbgtext">Opposing QBR</p>
+    </div>
+    <table class="table table-lined" id="opposing_qbr">
+      {% for stat in opposing_qbr %}
+      <tbody>
+        <tr><td>{{ stat.team_name }}</td><td>{{ stat.opposing_qbr }}</td></tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
 {% endblock %}

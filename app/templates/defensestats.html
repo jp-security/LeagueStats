@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block deffensestats %}active{% endblock %}
+{% block content %}
+<div class="col-md-8 col-md-offset-2 divtable">
+  <table class="table table-lined" id="stats">
+    <thead>
+      <th class="sortable">Team</th>
+      <th class="sortable">Games Played</th>
+      <th class="sortable">Points Allowed</th>
+      <th class="sortable">Total Yards Allowed</th>
+      <th class="sortable">Passing Yards Allowed</th>
+      <th class="sortable">Rushing Yards Allowed</th>
+      <th class="sortable">Turnovers Forced</th>
+      <th class="sortable">Opposing QBR</th>
+    </thead>
+  </table>
+
+  <script>
+  $.get('/raw/stats/defense').done(function(stats){
+    var data = JSON.parse(stats)
+
+    console.dir(stats)
+    $('#stats').DataTable( {
+      order: [[ 3, 'asc' ]],
+      paging: false,
+      data: data,
+      "aoColumns": [
+        { 'mData': "team" },
+        { 'mData': "games" },
+        { 'mData': "pointsagaisnt" },
+        { 'mData': "totalyards" },
+        { 'mData': "passingyards" },
+        { 'mData': "rushingyards" },
+        { 'mData': "turnovers" },
+        { 'mData': "qbr" }
+      ]
+    });
+  });
+  </script>
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@
   text-align: center;
   font-weight: bold;
   font-size: 16pt;
-  background-color: #f1e9d2!important;
+  background-color: #0E162D!important;
 }
 .table
 {
@@ -47,5 +47,23 @@ h1, h2, h3
 }
 .divbg
 {
-  background-color: #f1e9d2;
+  background-color: #0E162D;
+}
+.divtable
+{
+  background-color: #F1E9D2 !important;
+}
+.divbgtext
+{
+  color: #F1E9D2 !important;
+}
+.well
+{
+  border-color: black;
+  background-color: #0E162D;
+}
+.row
+{
+  margin-left: 0px;
+  margin-right: 0px;
 }

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block active %}active{% endblock %}
+{% block content %}
+<div class="row divbg">
+    {% for t in team %}
+    <div class="col-md-3">
+      <img src="/static/logo/{{ t.team_name }}.gif" height="75" width="100">
+    </div>
+    <div class="col-md-6">
+        <h1 class="text-center" style="color: #F1E9D2;">{{ t.team_city }} {{ t.team_name }}</h1>
+    </div>
+    <div class="col-md-3">
+      <h1 class="divbgtext text-center">{{ t.team_wins }}-{{ t.team_losses }}</h1>
+    </div>
+    {% endfor %}
+</div>
+<div>
+  <br/>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <p class="divbgtext">Offensive Stats</p>
+      </div>
+      <table class="table table-lined auto">
+        <tbody>
+          <tr><td>Points Scored</td><td>{{ offense.points_scored }}</td></tr>
+          <tr><td>Total Yards</td><td>{{ offense.total_yards }}</td></tr>
+          <tr><td>Passing Yards</td><td>{{ offense.passing_yards }}</td></tr>
+          <tr><td>Rushing Yards</td><td>{{ offense.rushing_yards }}</td></tr>
+          <tr><td>Turnovers</td><td>{{ offense.turnovers }}</td></tr>
+          <tr><td>QBR</td><td>{{ offense.qbr }}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <p class="divbgtext">Defensive Stats</p>
+      </div>
+      <table class="table table-lined auto">
+        <tbody>
+          <tr><td>Points Allowed</td><td>{{ defense.points_allowed }}</td></tr>
+          <tr><td>Total Yards Allowed</td><td>{{ defense.total_yards_against }}</td></tr>
+          <tr><td>Passing Yards Allowed</td><td>{{ defense.passing_yards_against }}</td></tr>
+          <tr><td>Rushing Yards Allowed</td><td>{{ defense.rushing_yards_against }}</td></tr>
+          <tr><td>Turnovers Forced</td><td>{{ offense.turnovers_forced }}</td></tr>
+          <tr><td>Opposing QBR</td><td>{{ defense.opposing_qbr }}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    {% for t in team %}
+    <div class="col-md-8 col-md-offset-2 divbg">
+      <h2 class="divbgtext text-center">All {{ t.team_name }} Games</h2>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+      <br/><br/>
+    </div>
+    {% for h in t.home %}
+    <div class="pannel panel-default col-md-8 col-md-offset-2">
+        <div class="panel-heading divbgtext">
+          {% if h.home_score > h.away_score: %}
+              {{ h.home.team_name }} defeats {{ h.away.team_name }} {{ h.home_score }} to {{ h.away_score }}
+          {% else %}
+              {{ h.away.team_name }} defeats {{ h.home.team_name }} {{ h.away_score }} to {{ h.home_score }}
+          {% endif %}
+        </div>
+        <table class="table table-lined auto">
+            <thead>
+                <tr><th>{{ h.away.team_name }} - {{ h.away_score }}</th><th>Stats</th><th>{{ h.home.team_name }} - {{ h.home_score }}</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>{{ h.away_total_yards }}</td><td>Total Yards</td><td>{{ h.home_total_yards }}</td></tr>
+                <tr><td>{{ h.away_passing_yards }}</td><td>Passing Yards</td><td>{{ h.home_passing_yards }}</td></tr>
+                <tr><td>{{ h.away_rushing_yards }}</td><td>Rushing Yards</td><td>{{ h.home_rushing_yards }}</td></tr>
+                <tr><td>{{ h.away_turn_overs }}</td><td>Turnovers</td><td>{{ h.home_turn_overs }}</td></tr>
+                <tr><td>{{ h.away_qbr }}</td><td>QBR</td><td>{{ h.home_qbr }}</td></tr>
+            </tbody>
+        </table>
+      </div>
+    {% endfor %}
+    {% for h in t.away %}
+    <div class="pannel panel-default col-md-8 col-md-offset-2">
+        <div class="panel-heading divbgtext">
+          {% if h.home_score > h.away_score: %}
+              {{ h.home.team_name }} defeats {{ h.away.team_name }} {{ h.home_score }} to {{ h.away_score }}
+          {% else %}
+              {{ h.away.team_name }} defeats {{ h.home.team_name }} {{ h.away_score }} to {{ h.home_score }}
+          {% endif %}
+        </div>
+        <table class="table table-lined auto">
+            <thead>
+                <tr><th>{{ h.away.team_name }} - {{ h.away_score }}</th><th>Stats</th><th>{{ h.home.team_name }} - {{ h.home_score }}</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>{{ h.away_total_yards }}</td><td>Total Yards</td><td>{{ h.home_total_yards }}</td></tr>
+                <tr><td>{{ h.away_passing_yards }}</td><td>Passing Yards</td><td>{{ h.home_passing_yards }}</td></tr>
+                <tr><td>{{ h.away_rushing_yards }}</td><td>Rushing Yards</td><td>{{ h.home_rushing_yards }}</td></tr>
+                <tr><td>{{ h.away_turn_overs }}</td><td>Turnovers</td><td>{{ h.home_turn_overs }}</td></tr>
+                <tr><td>{{ h.away_qbr }}</td><td>QBR</td><td>{{ h.home_qbr }}</td></tr>
+            </tbody>
+        </table>
+      </div>
+    {% endfor %}
+    {% endfor %}
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <p class="divbgtext">Offensive Stats/Per Game</p>
+      </div>
+      {% if offense.games_played-offense.no_stats_game == 0 %}
+      <table class="table table-lined auto">
+        <tbody>
+          <tr><td>Points Scored</td><td>0</td></tr>
+          <tr><td>Total Yards</td><td>0</td></tr>
+          <tr><td>Passing Yards</td><td>0</td></tr>
+          <tr><td>Rushing Yards</td><td>0</td></tr>
+          <tr><td>Turnovers</td><td>0</td></tr>
+        </tbody>
+      </table>
+      {% else %}
+      <table class="table table-lined auto">
+        <tbody>
+          <tr><td>Points Scored</td><td>{{ offense.points_scored/offense.games_played }}</td></tr>
+          <tr><td>Total Yards</td><td>{{ offense.total_yards/(offense.games_played-offense.no_stats_game) }}</td></tr>
+          <tr><td>Passing Yards</td><td>{{ offense.passing_yards/(offense.games_played-offense.no_stats_game) }}</td></tr>
+          <tr><td>Rushing Yards</td><td>{{ offense.rushing_yards/(offense.games_played-offense.no_stats_game) }}</td></tr>
+          <tr><td>Turnovers</td><td>{{ offense.turnovers/(offense.games_played-offense.no_stats_game) }}</td></tr>
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <p class="divbgtext">Defensive Stats/Per Game</p>
+      </div>
+      {% if defense.games_played-defense.no_stats_game == 0 %}
+      <table class="table table-lined auto">
+        <tbody>
+          <tr><td>Points Allowed</td><td>0</td></tr>
+          <tr><td>Total Yards Allowed</td><td>0</td></tr>
+          <tr><td>Passing Yards Allowed</td><td>0</td></tr>
+          <tr><td>Rushing Yards Allowed</td><td>0</td></tr>
+          <tr><td>Turnovers Forced</td><td>0</td></tr>
+        </tbody>
+      </table>
+      {% else %}
+      <table class="table table-lined auto">
+        <tbody>
+          <tr><td>Points Allowed</td><td>{{ defense.points_allowed/offense.games_played }}</td></tr>
+          <tr><td>Total Yards Allowed</td><td>{{ defense.total_yards_against/(offense.games_played-offense.no_stats_game) }}</td></tr>
+          <tr><td>Passing Yards Allowed</td><td>{{ defense.passing_yards_against/(offense.games_played-offense.no_stats_game) }}</td></tr>
+          <tr><td>Rushing Yards Allowed</td><td>{{ defense.rushing_yards_against/(offense.games_played-offense.no_stats_game) }}</td></tr>
+          <tr><td>Turnovers Forced</td><td>{{ defense.turnovers_forced/(offense.games_played-offense.no_stats_game) }}</td></tr>
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block offensestats %}active{% endblock %}
+{% block content %}
+<div class="col-md-8 col-md-offset-2 divtable">
+  <table class="table table-lined" id="stats">
+    <thead>
+      <th class="sortable">Team</th>
+      <th class="sortable">Games Played</th>
+      <th class="sortable">Points Scored</th>
+      <th class="sortable">Total Yards</th>
+      <th class="sortable">Passing Yards</th>
+      <th class="sortable">Rushing Yards</th>
+      <th class="sortable">Turnovers</th>
+      <th class="sortable">QBR</th>
+    </thead>
+  </table>
+</div>
+
+  <script>
+  $.get('/raw/stats/offense').done(function(stats){
+    var data = JSON.parse(stats)
+
+    console.dir(stats)
+    $('#stats').DataTable( {
+      order: [[ 3, 'desc' ]],
+      paging: false,
+      data: data,
+      "aoColumns": [
+        { 'mData': "team" },
+        { 'mData': "games" },
+        { 'mData': "pointsfor" },
+        { 'mData': "totalyards" },
+        { 'mData': "passingyards" },
+        { 'mData': "rushingyards" },
+        { 'mData': "turnovers" },
+        { 'mData': "qbr" }
+      ]
+    });
+  });
+  </script>
+{% endblock %}

@@ -6,7 +6,7 @@
     <title>CAG NFL Stats</title>
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="/static/jquery.colorbox.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -26,8 +26,36 @@
           <ul class="nav navbar-nav">
             <li class="{% block home %}{% endblock %}"><a href="{{ url_for('home') }}">Home</a></li>
             <li class="{% block standings %}{% endblock %}"><a href="{{ url_for('standings') }}">Standings</a></li>
-            <li class="{% block stats %}{% endblock %}"><a href="{{ url_for('stats') }}">Stats</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Stats<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="{% block stats %}{% endblock %}"><a href="{{ url_for('stats') }}">League Leaders</a></li>
+                <li class="{% block offensestats %}{% endblock %}"><a href="{{ url_for('offense_stats') }}">Offensive Stats</a></li>
+                <li class="{% block defensestats %}{% endblock %}"><a href="{{ url_for('defense_stats') }}">Defensive Stats</a></li>
+              </ul>
             <li class="{% block games %}{% endblock %}"><a href="{{ url_for('games') }}">Games</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Teams<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="{% block Ravens %}{% endblock %}"><a href="{{ url_for('team', teamname='ravens') }}">Ravens</a></li>
+                <li class="{% block Browns %}{% endblock %}"><a href="{{ url_for('team', teamname='browns') }}">Browns</a></li>
+                <li class="{% block Steelers %}{% endblock %}"><a href="{{ url_for('team', teamname='steelers') }}">Steelers</a></li>
+                <li class="{% block Bengals %}{% endblock %}"><a href="{{ url_for('team', teamname='bengals') }}">Bengals</a></li>
+                <li class="{% block Redskins %}{% endblock %}"><a href="{{ url_for('team', teamname='redskins') }}">Redskins</a></li>
+                <li class="{% block Chargers %}{% endblock %}"><a href="{{ url_for('team', teamname='chargers') }}">Chargers</a></li>
+                <li class="{% block Buccaneers %}{% endblock %}"><a href="{{ url_for('team', teamname='buccaneers') }}">Buccaneers</a></li>
+                <li class="{% block Bears %}{% endblock %}"><a href="{{ url_for('team', teamname='bears') }}">Bears</a></li>
+                <li class="{% block Chiefs %}{% endblock %}"><a href="{{ url_for('team', teamname='chiefs') }}">Chiefs</a></li>
+                <li class="{% block Oilers %}{% endblock %}"><a href="{{ url_for('team', teamname='oilers') }}">Oilers</a></li>
+                <li class="{% block Eagles %}{% endblock %}"><a href="{{ url_for('team', teamname='eagles') }}">Eagles</a></li>
+                <li class="{% block Seahawks %}{% endblock %}"><a href="{{ url_for('team', teamname='seahawks') }}">Seahawks</a></li>
+                <li class="{% block Vikings %}{% endblock %}"><a href="{{ url_for('team', teamname='vikings') }}">Vikings</a></li>
+                <li class="{% block Packers %}{% endblock %}"><a href="{{ url_for('team', teamname='packers') }}">Packers</a></li>
+                <li class="{% block Lions %}{% endblock %}"><a href="{{ url_for('team', teamname='lions') }}">Lions</a></li>
+                <li class="{% block Raiders %}{% endblock %}"><a href="{{ url_for('team', teamname='raiders') }}">Raiders</a></li>
+                <li class="{% block Dolphins %}{% endblock %}"><a href="{{ url_for('team', teamname='dolphins') }}">Dolphins</a></li>
+                <li class="{% block Giants %}{% endblock %}"><a href="{{ url_for('team', teamname='giants') }}">Giants</a></li>
+              </ul>
           </ul>
         </div>
       </div>
