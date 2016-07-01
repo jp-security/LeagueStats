@@ -114,7 +114,7 @@
       {% if offense.games_played-offense.no_stats_game == 0 %}
       <table class="table table-lined auto">
         <tbody>
-          <tr><td>Points Scored</td><td>0</td></tr>
+          <tr><td>Points Scored</td><td>{{ offense.points_scored }}</td></tr>
           <tr><td>Total Yards</td><td>0</td></tr>
           <tr><td>Passing Yards</td><td>0</td></tr>
           <tr><td>Rushing Yards</td><td>0</td></tr>
@@ -140,7 +140,7 @@
       {% if defense.games_played-defense.no_stats_game == 0 %}
       <table class="table table-lined auto">
         <tbody>
-          <tr><td>Points Allowed</td><td>0</td></tr>
+          <tr><td>Points Allowed</td><td>{{ defense.points_allowed }}</td></tr>
           <tr><td>Total Yards Allowed</td><td>0</td></tr>
           <tr><td>Passing Yards Allowed</td><td>0</td></tr>
           <tr><td>Rushing Yards Allowed</td><td>0</td></tr>

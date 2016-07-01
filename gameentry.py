@@ -54,21 +54,25 @@ if no_stats == 'yes':
     for ohstats in offense_home_stats:
         ohstats.games_played = ohstats.games_played + 1
         ohstats.no_stats_game = ohstats.no_stats_game + 1
+        ohstats.points_scored = ohstats.points_scored + int(home_score)
 
     defense_home_stats = models.DefenseTeamStats.query.filter_by(team_id=home_team_id).all()
     for dhstats in defense_home_stats:
         dhstats.games_played = dhstats.games_played + 1
         dhstats.no_stats_game = dhstats.no_stats_game + 1
+        dhstats.points_allowed = dhstats.points_allowed + int(away_score)
 
     offense_away_stats = models.OffenseTeamStats.query.filter_by(team_id=away_team_id).all()
     for oastats in offense_away_stats:
         oastats.games_played = oastats.games_played + 1
         oastats.no_stats_game = oastats.no_stats_game + 1
+        oastats.points_scored = oastats.points_scored + int(away_score)
 
     defense_away_stats = models.DefenseTeamStats.query.filter_by(team_id=away_team_id).all()
     for dastats in defense_away_stats:
         dastats.games_played = dastats.games_played + 1
         dastats.no_stats_game = dastats.no_stats_game + 1
+        dastats.points_allowed = dastats.points_allowed + int(home_score)
 
 
 elif no_stats == 'no':
