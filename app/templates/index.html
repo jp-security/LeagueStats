@@ -29,7 +29,7 @@
           <h3 class="divbgtext text-center">Week 1</h3>
           <p class="divbgtext text-center">Bears @ Chiefs</p>
           <h3 class="divbgtext text-center">Week 2</h3>
-          <p class="divbgtext text-center">Oilers @ Ravens</p>
+          <p class="divbgtext text-center">Oilers defeat Ravens 17-7</p>
           <h3 class="divbgtext text-center">Week 3</h3>
           <p class="divbgtext text-center">Oilers @ Chiefs</p>
           <h3 class="divbgtext text-center">Week 4</h3>
@@ -53,9 +53,8 @@
     </div>
     <div class="col-md-3">
       <div class="divbg">
-        <h1 class="text-center divbgtext">Helpful Links</h1>
-        <h2 class="text-center"><a href="http://gamingworldforums.com/discuss/index.php?/forum/900-all-pro-football/">CAG NFL</a></h2>
-        <h2 class="text-center"><a href="http://www.scheduleague.com/xlv">Schedule</a></h2>
+        <h1 class="text-center divbgtext">Gazzett</h1>
+        <img src="/static/CAGNFLStatsGazzett-Week2.gif" class="img-responsive" id="week2-paper" onmouseover="" style="cursor: pointer;">
       </div>
     </div>
   </div>
@@ -66,6 +65,9 @@ $("#champion").click(function() {
 });
 $("#champions-wall").click(function() {
   $.colorbox({href:"/static/DazzoTrophyWall.png"});
+});
+$("#week2-paper").click(function() {
+  $.colorbox({href:"/static/CAGNFLStatsGazzett-Week2.gif"});
 });
 </script>
 {% endblock %}
