@@ -9,8 +9,8 @@
   <div class="row">
     <div class="col-md-3">
       <div class="divbg">
-        <h1 class="text-center divbgtext" >CAG Champion</h1>
-        <h1 class="text-center divbgtext">Dazzo0007</h1>
+        <h1 class="text-center divbgtext" >CAG XLV Champion</h1>
+        <h1 class="text-center divbgtext">Pcat Magoo</h1>
       </div>
       <img src="/static/Cag-Champion-Roster.gif" class="img-responsive" id="champion" onmouseover="" style="cursor: pointer;">
       <br>
@@ -27,14 +27,13 @@
         </div>
         <div class="divbg">
           <h3 class="divbgtext text-center">Week 1</h3>
-          <p class="divbgtext text-center">Bears @ Chiefs</p>
+          <p class="divbgtext text-center">Chiefs defeat Bears 31-17</p>
           <h3 class="divbgtext text-center">Week 2</h3>
           <p class="divbgtext text-center">Oilers defeat Ravens 17-7</p>
           <h3 class="divbgtext text-center">Week 3</h3>
           <p class="divbgtext text-center">Oilers @ Chiefs</p>
           <h3 class="divbgtext text-center">Week 4</h3>
-          <p class="divbgtext text-center">Steelers @ Giants</p>
-          <p class="divbgtext text-center">[New Player Bowl]</p>
+          <p class="divbgtext text-center">Eagles defeat Lions 20-14</p>
           <h3 class="divbgtext text-center">Week 5</h3>
           <p class="divbgtext text-center">Ravens @ Packers</p>
           <h3 class="divbgtext text-center">Week 6</h3>
@@ -53,7 +52,13 @@
     </div>
     <div class="col-md-3">
       <div class="divbg">
-        <h1 class="text-center divbgtext">Gazzett</h1>
+          <h1 class="text-center divbgtext">Gazzett</h1>
+      </div>
+      <div>
+        <img src="/static/CAGNFLStatsGazzett-Week3.png" class="img-responsive" id="week3-paper" onmouseover="" style="cursor: pointer;">
+      </div>
+      <br/>
+      <div>
         <img src="/static/CAGNFLStatsGazzett-Week2.gif" class="img-responsive" id="week2-paper" onmouseover="" style="cursor: pointer;">
       </div>
     </div>
@@ -68,6 +73,9 @@ $("#champions-wall").click(function() {
 });
 $("#week2-paper").click(function() {
   $.colorbox({href:"/static/CAGNFLStatsGazzett-Week2.gif"});
+});
+$("#week3-paper").click(function() {
+  $.colorbox({href:"/static/CAGNFLStatsGazzett-Week3.png"});
 });
 </script>
 {% endblock %}
