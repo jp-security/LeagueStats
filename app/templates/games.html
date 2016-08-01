@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block games %}active{% endblock %}
 {% block content %}
-<nav class="navbar navbar-inverse" role="navigation">
+<div class="navbg">
   <ul class="nav nav-pills" id="week">
     <li class="{{ active_week }}"><a href="{{ url_for('games') }}">Games</a></li>
     <li class="{{ active_week1 }}"><a href="{{ url_for('week1') }}">Week 1</a></li>
@@ -13,7 +13,7 @@
     <li class="{{ active_week7 }}"><a href="{{ url_for('week7') }}">Week 7</a></li>
     <li class="{{ active_week8 }}"><a href="{{ url_for('week8') }}">Week 8</a></li>
   </ul>
-</nav>
+</div>
 
 <div class="page-header text-center">
 {% if week == 'All' %}
@@ -27,9 +27,9 @@
     <div class="pannel panel-default col-md-4">
         <div class="panel-heading divbgtext">
           {% if game.home_score > game.away_score: %}
-              {{ game.home.team_name }} defeats {{ game.away.team_name }} {{ game.home_score }} to {{ game.away_score }}
+              {{ game.home.team_name }} defeat {{ game.away.team_name }} {{ game.home_score }} to {{ game.away_score }}
           {% else %}
-              {{ game.away.team_name }} defeats {{ game.home.team_name }} {{ game.away_score }} to {{ game.home_score }}
+              {{ game.away.team_name }} defeat {{ game.home.team_name }} {{ game.away_score }} to {{ game.home_score }}
           {% endif %}
         </div>
         <table class="table table-lined auto">

@@ -107,6 +107,18 @@ def standings_json():
     dataSet = []
 
     for team in teams:
+        team_data = {'owner': team.team_owner, 'team': team.team_name, 'division': team.division, 'wins': team.team_wins, 'losses': team.team_losses}
+        dataSet.append(team_data)
+
+    return json.dumps(dataSet)
+
+@app.route('/raw/standings/<division>')
+def standings_navy_json(division):
+    teams = models.Teams.query.filter_by(division=division).all()
+
+    dataSet = []
+
+    for team in teams:
         team_data = {'owner': team.team_owner, 'team': team.team_name, 'wins': team.team_wins, 'losses': team.team_losses}
         dataSet.append(team_data)
 
@@ -143,7 +155,9 @@ def defense_stats_json():
 
 @app.route('/stats')
 def stats():
-    total_yards = models.OffenseTeamStats.query.with_entities(models.OffenseTeamStats.team_name, models.OffenseTeamStats.total_yards).order_by(models.OffenseTeamStats.total_yards.desc()).limit(3).all()
+    #per_game = (models.OffenseTeamStats.games_played.query.all() - models.OffenseTeamStats.query.
+
+    total_yards = models.OffenseTeamStats.query.with_entities(models.OffenseTeamStats.team_name, models.OffenseTeamStats.total_yards).order_by((models.OffenseTeamStats.total_yards).desc()).limit(3).all()
     passing_yards = models.OffenseTeamStats.query.with_entities(models.OffenseTeamStats.team_name, models.OffenseTeamStats.passing_yards).order_by(models.OffenseTeamStats.passing_yards.desc()).limit(3).all()
     rushing_yards = models.OffenseTeamStats.query.with_entities(models.OffenseTeamStats.team_name, models.OffenseTeamStats.rushing_yards).order_by(models.OffenseTeamStats.rushing_yards.desc()).limit(3).all()
     turnovers = models.OffenseTeamStats.query.with_entities(models.OffenseTeamStats.team_name, models.OffenseTeamStats.turnovers).order_by(models.OffenseTeamStats.turnovers.asc()).limit(3).all()
@@ -181,9 +195,19 @@ def defense_stats():
 
 @app.route('/standings')
 def standings():
-    #teams = models.Teams.query.all()
     return render_template('standings.html',
                             title="Standings")
+
+@app.route('/standings/navy')
+def navy_standings():
+    return render_template('navystandings.html',
+                            title="Navy Standings")
+
+@app.route('/standings/gold')
+def gold_standings():
+    return render_template('goldstandings.html',
+                            title="Gold Standings")
+
 
 @app.route('/team/<teamname>')
 def team(teamname):

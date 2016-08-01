@@ -1,17 +1,11 @@
 {% extends "base.html" %}
 {% block standings %}active{% endblock %}
 {% block content %}
-<style>
-  .nav-pills
-  {
-    color: #0E162D;
-  }
-</style>
 <div class="navbg">
-  <ul class="nav nav-pills col-md-offset-2">
-    <li class="active" style=""><a href="{{ url_for('standings') }}">Full Standings</a></li>
+  <ul class="nav nav-tabs col-md-offset-2">
+    <li><a href="{{ url_for('standings') }}">Full Standings</a></li>
     <li><a href="{{ url_for('navy_standings') }}">Navy Division</a></li>
-    <li><a href="{{ url_for('gold_standings') }}">Gold Division</a></li>
+    <li class="active"><a href="{{ url_for('gold_standings') }}">Gold Division</a></li>
   </ul>
 </div>
 <div class="col-md-8 col-md-offset-2 divtable">
@@ -19,23 +13,21 @@
     <thead>
       <th class="sorting">Team Owner</th>
       <th class="sorting">Team Name</th>
-      <th class="sorting">Division</th>
       <th class="sorting">Wins</th>
       <th class="sorting">Losses</th>
   </table>
 
   <script>
-  $.get('./raw/standings').done(function(standings){
+  $.get('/raw/standings/gold').done(function(standings){
     var data = JSON.parse(standings)
 
     $('#standings').DataTable( {
-      order: [[ 3, 'desc' ], [4, 'asc']],
+      order: [[ 2, 'desc' ], [3, 'asc']],
       paging: false,
       data: data,
       "aoColumns": [
         { 'mData': "owner" },
         { 'mData': "team" },
-        { 'mData': "division"},
         { 'mData': "wins" },
         { 'mData': "losses" }
       ]
