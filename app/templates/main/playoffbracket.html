@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block standings %}active{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/bracket.css">
+<style>
+  .nav-pills
+  {
+    color: #0E162D;
+  }
+</style>
+<div class="navbg">
+  <ul class="nav nav-pills col-md-offset-2">
+    <li class="active" style=""><a href="{{ url_for('standings') }}">Full Standings</a></li>
+    <li><a href="{{ url_for('navy_standings') }}">Navy Division</a></li>
+    <li><a href="{{ url_for('gold_standings') }}">Gold Division</a></li>
+    <li><a href="{{ url_for('bracket') }}">Playoff Bracket</a></li>
+  </ul>
+</div>
+
+<div class="tournament8-wrap brackbg col-md-8 col-md-offset-2">
+		<div class="round4-top winner4">Winner</div>
+		<div class="round3-topwrap">
+			<div class="round3-top">Top finalist</div>
+			<div class="round2-topwrap">
+				<div class="round2-top">1-8 winner</div>
+				<div class="round1-top">#1 seed</div>
+				<div class="round1-bottom">#8 seed</div>
+			</div>
+			<div class="round2-bottomwrap">
+				<div class="round2-bottom">4-5 winner</div>
+				<div class="round1-top">#4 seed</div>
+				<div class="round1-bottom">#5 seed</div>
+			</div>
+		</div>
+		<div class="round3-bottomwrap">
+			<div class="round3-bottom">Bottom finalist</div>
+			<div class="round2-topwrap">
+				<div class="round2-top">2-7 winner</div>
+				<div class="round1-top">#2 seed</div>
+				<div class="round1-bottom">#7 seed</div>
+			</div>
+			<div class="round2-bottomwrap">
+				<div class="round2-bottom">3-6 winner</div>
+				<div class="round1-top">#3 seed</div>
+				<div class="round1-bottom">#6 seed</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

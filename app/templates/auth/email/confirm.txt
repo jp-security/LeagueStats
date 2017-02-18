@@ -1,0 +1,13 @@
+Dear {{ user.username }}
+
+Welcome to CAGStats!
+
+To confirm your account please click on the following link:
+
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+Best,
+
+CAGStats Team
+
+Note: replies to this address are not monitored

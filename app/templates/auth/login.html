@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}CAG Stats - Login{% endblock %}
+
+{% block content %}
+<div class="pannel panel-default col-md-12">
+  <div class="panel-heading">
+    <h1 class="text-center divbgtext">Login</h1>
+</div>
+<div class="col-md-4 col-md-offset-4 divbgtext divbg">
+  <br><br>
+  {{ wtf.quick_form(form) }}
+  <p>
+    New user?
+    <a href="{{ url_for('auth.register') }}">
+      Click here to register
+    </a>
+  </p>
+</div>
+
+{% endblock %}

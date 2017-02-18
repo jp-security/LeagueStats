@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Game Entry{% endblock %}
+
+{% block content %}
+<div class="pannel panel-default col-md-12">
+  <div class="panel-heading">
+    <h1 class="text-center divbgtext">Game Entry</h1>
+</div>
+<div class="col-md-8 col-md-offset-2 divbg">
+  <br><br>
+  <form class="form form-horizontal" method="post">
+    <div class="col-md-5 col-md-offset-4 divbgtext">
+      {{ form.hidden_tag() }}
+      {{ wtf.form_field(form.no_stats) }}
+      {{ wtf.form_field(form.week) }}
+      {{ wtf.form_field(form.winning_team) }}
+    </div>
+    <div class="col-md-2 col-md-offset-4 divbgtext">
+      {{ wtf.form_field(form.home_team) }}
+      {{ wtf.form_field(form.home_score) }}
+      {{ wtf.form_field(form.home_passing_yards) }}
+      {{ wtf.form_field(form.home_rushing_yards) }}
+      {{ wtf.form_field(form.home_turn_overs) }}
+      {{ wtf.form_field(form.home_qbr) }}
+    </div>
+    <div class="col-md-2 col-md-offset-1 divbgtext">
+      {{ wtf.form_field(form.away_team) }}
+      {{ wtf.form_field(form.away_score) }}
+      {{ wtf.form_field(form.away_passing_yards) }}
+      {{ wtf.form_field(form.away_rushing_yards) }}
+      {{ wtf.form_field(form.away_turn_overs) }}
+      {{ wtf.form_field(form.away_qbr) }}
+    </div>
+    <div class="col-md-5 col-md-offset-8 divbgtext">
+      <br><br>
+      {{ wtf.form_field(form.submit) }}
+    </div>
+  </form>
+  <div class="col-md-8 col-md-offset-2 divbg">
+    <div class="col-md-5 col-md-offset-4 divbgtext">
+      <br><br><h1 class="text-center divbgtext">Last 5 Games</h1>
+      <table class="table table-lined auto">
+        <thead><td>Week</td><td>Home Team</td><td>Home Score</td><td>Away Team</td><td>Away Score</td></thead>
+        {% for g in last_five %}
+        <tbody>
+          <tr><td>{{ g.week }}</td><td>{{ g.home.team_name }}</td><td>{{ g.home_score }}</td>
+            <td>{{ g.away.team_name }}</td><td>{{ g.away_score }}</td></tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

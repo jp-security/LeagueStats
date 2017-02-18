@@ -3,9 +3,9 @@
 {% block content %}
 <div class="navbg">
   <ul class="nav nav-tabs col-md-offset-2">
-    <li><a href="{{ url_for('standings') }}">Full Standings</a></li>
-    <li class="active"><a href="{{ url_for('navy_standings') }}">Navy Division</a></li>
-    <li><a href="{{ url_for('gold_standings') }}">Gold Division</a></li>
+    <li><a href="{{ url_for('main.standings') }}">Full Standings</a></li>
+    <li><a href="{{ url_for('main.navy_standings') }}">Navy Division</a></li>
+    <li class="active"><a href="{{ url_for('main.gold_standings') }}">Gold Division</a></li>
   </ul>
 </div>
 <div class="col-md-8 col-md-offset-2 divtable">
@@ -18,7 +18,7 @@
   </table>
 
   <script>
-  $.get('/raw/standings/navy').done(function(standings){
+  $.get('/raw/standings/gold').done(function(standings){
     var data = JSON.parse(standings)
 
     $('#standings').DataTable( {

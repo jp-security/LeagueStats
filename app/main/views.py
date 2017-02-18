@@ -1,106 +1,183 @@
-from flask import render_template, request, redirect
-from app import app, models
+from datetime import datetime
 import json
+from flask import render_template, session, redirect, url_for, request, flash
+from flask.ext.login import login_user, logout_user, login_required, current_user
+from .gameentry import NoStats, Stats
+from .database import LastFive
+from .forms import GameInformation, TeamEntry, EditProfileAdminForm, EditProfileForm
+from .teamentry import teamAdd
+from . import main
+from .. import db
+import app.models as models
+from app.models import User, Role
+from ..decorators import admin_required, permission_required
 
 active_week = "active"
 
-@app.route('/')
-@app.route('/home')
+@main.route('/team-entry', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def team_entry():
+    form = TeamEntry()
+    if form.validate_on_submit():
+        teamAdd()
+        return redirect(url_for('main.home'))
+    return render_template('main/teamentry.html', form=form)
+
+@main.route('/game-entry', methods=['GET', 'POST'])
+@login_required
+def game_entry():
+    form = GameInformation()
+    last_five = LastFive()
+
+    if form.validate_on_submit():
+        if form.no_stats.data == 'Yes':
+            NoStats(form.week.data, form.winning_team.data, form.home_team.data, form.home_score.data, form.away_team.data, form.away_score.data)
+        elif form.no_stats.data == 'No':
+            Stats(form.week.data, form.winning_team.data, form.home_team.data, form.home_score.data, form.home_passing_yards.data, form.home_rushing_yards.data,
+                    form.home_turn_overs.data, form.home_qbr.data, form.away_team.data, form.away_score.data, form.away_passing_yards.data,
+                    form.away_rushing_yards.data, form.away_turn_overs.data, form.away_qbr.data)
+        else:
+            flash('There were errors submitting the game results')
+        return redirect(url_for('game_entry'))
+    return render_template('main/gameentry.html', form=form, last_five=last_five)
+
+@main.route('/user/<username>')
+def user(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(404)
+    return render_template('main/user.html', user=user)
+
+@main.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.name = form.name.data
+        db.session.add(user)
+        flash('Your profile has been updated.')
+        return redirect(url_for('main.user', username=current_user.name))
+    form.name.data = current_user.name
+    return render_template('main/edit_profile.html', form=form)
+
+@main.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_profile_admin(id):
+    user = User.query.get_or_404(id)
+    form = EditProfileAdminForm(user=user)
+    if form.validate_on_submit():
+        user.email = form.email.data
+        user.username = form.username.data
+        user.confirmed = form.confirmed.data
+        user.role = Role.query.get(form.role.data)
+        db.session.add(user)
+        flash('The profile has been updated')
+        return redirect(url_for('.user', username=user.username))
+    form.email.data = user.email
+    form.username.data = user.username
+    form.confirmed.data = user.confirmed
+    form.role.data = user.role_id
+    return render_template('main/edit_profile.html', form=form, user=user)
+
+@main.route('/')
+@main.route('/home')
 def home():
-    return render_template('index.html',
+    return render_template('main/index.html',
                             title="Home")
 
-@app.route('/games')
+@main.route('/games')
 def games():
     week = 'All'
     games = models.Games.query.all()
-    return render_template('games.html',
+    return render_template('main/games.html',
                             title="Games",
                             week=week,
                             active_week=active_week,
                             games=games)
 
-@app.route('/games/week1')
+@main.route('/games/week1')
 def week1():
     week = 1
     games = models.Games.query.filter_by(week=week).all()
-    return render_template('games.html',
+    return render_template('main/games.html',
                             title="Games",
                             week=week,
                             active_week1=active_week,
                             games=games)
 
-@app.route('/games/week2')
+@main.route('/games/week2')
 def week2():
     week = 2
     games = models.Games.query.filter_by(week=week).all()
-    return render_template('games.html',
+    return render_template('main/games.html',
                             title="Games",
                             week=week,
                             active_week2=active_week,
                             games=games)
 
-@app.route('/games/week3')
+@main.route('/games/week3')
 def week3():
     week = 3
     games = models.Games.query.filter_by(week=week).all()
-    return render_template('games.html',
+    return render_template('main/games.html',
                             title="Games",
                             week=week,
                             active_week3=active_week,
                             games=games)
 
-@app.route('/games/week4')
+@main.route('/games/week4')
 def week4():
     week = 4
     games = models.Games.query.filter_by(week=week).all()
-    return render_template('games.html',
+    return render_template('main/games.html',
                             title="Games",
                             week=week,
                             active_week4=active_week,
                             games=games)
 
-@app.route('/games/week5')
+@main.route('/games/week5')
 def week5():
     week = 5
     games = models.Games.query.filter_by(week=week).all()
-    return render_template('games.html',
+    return render_template('main/games.html',
                             title="Games",
                             week=week,
                             active_week5=active_week,
                             games=games)
 
-@app.route('/games/week6')
+@main.route('/games/week6')
 def week6():
     week = 6
     games = models.Games.query.filter_by(week=week).all()
-    return render_template('games.html',
+    return render_template('main/games.html',
                             title="Games",
                             week=week,
                             active_week6=active_week,
                             games=games)
 
-@app.route('/games/week7')
+@main.route('/games/week7')
 def week7():
     week = 7
     games = models.Games.query.filter_by(week=week).all()
-    return render_template('games.html',
+    return render_template('main/games.html',
                             title="Games",
                             week=week,
                             active_week7=active_week,
                             games=games)
 
-@app.route('/games/week8')
+@main.route('/games/week8')
 def week8():
     week = 8
     games = models.Games.query.filter_by(week=week).all()
-    return render_template('games.html',
+    return render_template('main/games.html',
                             title="Games",
                             week=week,
                             active_week8=active_week,
                             games=games)
 
-@app.route('/raw/standings')
+@main.route('/raw/standings')
 def standings_json():
     teams = models.Teams.query.all()
 
@@ -112,7 +189,7 @@ def standings_json():
 
     return json.dumps(dataSet)
 
-@app.route('/raw/standings/<division>')
+@main.route('/raw/standings/<division>')
 def standings_navy_json(division):
     teams = models.Teams.query.filter_by(division=division).all()
 
@@ -124,7 +201,7 @@ def standings_navy_json(division):
 
     return json.dumps(dataSet)
 
-@app.route('/raw/stats/offense')
+@main.route('/raw/stats/offense')
 def offense_stats_json():
     offense_stats = models.OffenseTeamStats.query.all()
 
@@ -138,7 +215,7 @@ def offense_stats_json():
 
     return json.dumps(offenseDataSet)
 
-@app.route('/raw/stats/defense')
+@main.route('/raw/stats/defense')
 def defense_stats_json():
     defense_stats = models.DefenseTeamStats.query.all()
 
@@ -153,7 +230,7 @@ def defense_stats_json():
     return json.dumps(defenseDataSet)
 
 
-@app.route('/stats')
+@main.route('/stats')
 def stats():
     #per_game = (models.OffenseTeamStats.games_played.query.all() - models.OffenseTeamStats.query.
 
@@ -169,7 +246,7 @@ def stats():
     turnovers_forced = models.OffenseTeamStats.query.with_entities(models.DefenseTeamStats.team_name, models.DefenseTeamStats.turnovers_forced).order_by(models.DefenseTeamStats.turnovers_forced.desc()).limit(3).all()
     opposing_qbr = models.OffenseTeamStats.query.with_entities(models.DefenseTeamStats.team_name, models.DefenseTeamStats.opposing_qbr).order_by(models.DefenseTeamStats.opposing_qbr.asc()).limit(3).all()
 
-    return render_template('stats.html',
+    return render_template('main/stats.html',
                             title='Stats',
                             total_yards=total_yards,
                             passing_yards=passing_yards,
@@ -183,33 +260,33 @@ def stats():
                             opposing_qbr=opposing_qbr)
 
 
-@app.route('/stats/offense')
+@main.route('/stats/offense')
 def offense_stats():
-    return render_template('offensestats.html',
+    return render_template('main/offensestats.html',
                             title="Stats")
 
-@app.route('/stats/defense')
+@main.route('/stats/defense')
 def defense_stats():
-    return render_template('defensestats.html',
+    return render_template('main/defensestats.html',
                             title="Stats")
 
-@app.route('/standings')
+@main.route('/standings')
 def standings():
-    return render_template('standings.html',
+    return render_template('main/standings.html',
                             title="Standings")
 
-@app.route('/standings/navy')
+@main.route('/standings/navy')
 def navy_standings():
-    return render_template('navystandings.html',
+    return render_template('main/navystandings.html',
                             title="Navy Standings")
 
-@app.route('/standings/gold')
+@main.route('/standings/gold')
 def gold_standings():
-    return render_template('goldstandings.html',
+    return render_template('main/goldstandings.html',
                             title="Gold Standings")
 
 
-@app.route('/team/<teamname>')
+@main.route('/team/<teamname>')
 def team(teamname):
     team = models.Teams.query.filter_by(team_name=teamname).all()
 
@@ -217,16 +294,8 @@ def team(teamname):
         offense = models.OffenseTeamStats.query.filter_by(team_id=t.id).first()
         defense = models.DefenseTeamStats.query.filter_by(team_id=t.id).first()
 
-    return render_template('teams.html',
+    return render_template('main/teams.html',
                             team=team,
                             active=teamname,
                             offense=offense,
                             defense=defense)
-
-@app.errorhandler(404)
-def not_found_error(error):
-    return render_template('404.html'), 404
-
-
-if __name__ == "__main__":
-    app.run(port=port)
