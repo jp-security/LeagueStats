@@ -2,7 +2,7 @@ from . import main
 from .. import db
 import app.models as models
 
-def NoStats(week, winning_team, home_team, home_score, away_team, away_score):
+def NoStats(week, added_by, winning_team, home_team, home_score, away_team, away_score):
     home_team = models.Teams.query.filter_by(team_name=home_team).all()
     for h in home_team:
         home_team_id = int(h.id)
@@ -25,6 +25,7 @@ def NoStats(week, winning_team, home_team, home_score, away_team, away_score):
 
     game_stats = {
     'week': week,
+    'added_by': added_by,
     'home_team': home_team_id,
     'away_team': away_team_id,
     'home_score': home_score,
@@ -87,9 +88,8 @@ def NoStats(week, winning_team, home_team, home_score, away_team, away_score):
     db.session.add(a)
     db.session.add(oastats)
     db.session.add(dastats)
-    db.session.commit()
 
-def Stats(week, winning_team, home_team, home_score, home_passing_yards, home_rushing_yards, home_turn_overs, home_qbr,
+def Stats(week, added_by, winning_team, home_team, home_score, home_passing_yards, home_rushing_yards, home_turn_overs, home_qbr,
             away_team, away_score, away_passing_yards, away_rushing_yards, away_turn_overs, away_qbr):
     home_team = models.Teams.query.filter_by(team_name=home_team).all()
     for h in home_team:
@@ -113,6 +113,7 @@ def Stats(week, winning_team, home_team, home_score, home_passing_yards, home_ru
 
     game_stats = {
     'week': week,
+    'added_by': added_by,
     'home_team': home_team_id,
     'away_team': away_team_id,
     'home_score': home_score,
@@ -203,4 +204,3 @@ def Stats(week, winning_team, home_team, home_score, home_passing_yards, home_ru
     db.session.add(a)
     db.session.add(oastats)
     db.session.add(dastats)
-    db.session.commit()

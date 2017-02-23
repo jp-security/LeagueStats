@@ -9,12 +9,6 @@
   <div class="row">
     <div class="col-md-3">
       <div class="divbg">
-        <h1 class="text-center divbgtext" >CAG XLV Champion</h1>
-        <h1 class="text-center divbgtext">Pcat Magoo</h1>
-      </div>
-      <img src="/static/Cag-Champion-Roster.gif" class="img-responsive" id="champion" onmouseover="" style="cursor: pointer;">
-      <br>
-      <div class="divbg">
         <h1 class="text-center divbgtext">Champions Wall</h1>
         <h3 class="text-center divbgtext">Located at CAG Headquarters</h3>
       </div>
@@ -22,60 +16,48 @@
     </div>
     <div class="col-md-6">
       <div class="col-md-8 col-md-offset-2">
-        <div class="divbg">
-          <h1 class="text-center divbgtext">Game of the Week</h1>
+        <br>
+        <div class="panel-heading divbgtext">
+          <h1 class="divbgtext">Last 5 Games Played</h1>
         </div>
-        <div class="divbg">
-          <h3 class="divbgtext text-center">Week 1</h3>
-          <p class="divbgtext text-center">Chiefs defeat Bears 31-17</p>
-          <h3 class="divbgtext text-center">Week 2</h3>
-          <p class="divbgtext text-center">Oilers defeat Ravens 17-7</p>
-          <h3 class="divbgtext text-center">Week 3</h3>
-          <p class="divbgtext text-center">Oilers defeat Chiefs 21-20</p>
-          <h3 class="divbgtext text-center">Week 4</h3>
-          <p class="divbgtext text-center">Eagles defeat Lions 20-14</p>
-          <h3 class="divbgtext text-center">Week 5</h3>
-          <p class="divbgtext text-center">Packers defeat Ravens 22-7</p>
-          <h3 class="divbgtext text-center">Week 6</h3>
-          <p class="divbgtext text-center">Packers @ Bears</p>
-          <p class="divbgtext text-center">[Dazzo Bowl]</p>
-          <h3 class="divbgtext text-center">Week 7</h3>
-          <p class="divbgtext text-center">Ravens @ Bears</p>
-          <h3 class="divbgtext text-center">Week 8</h3>
-          <h4 class="divbgtext text-center">Double Header</h4>
-          <p class="divbgtext text-center">Packers @ Oilers</p>
-          <p class="divbgtext text-center">Chiefs @ Chargers</p>
-          <h3 class="divbgtext text-center">Week 9</h3>
-          <p class="divbgtext text-center">Browns @ Steelers</p>
+        <br>
+        {% for game in last_five %}
+        <div class="panel-heading divbgtext">
+          {% if game.home_score > game.away_score: %}
+              {{ game.home.team_name }} defeat {{ game.away.team_name }} {{ game.home_score }} to {{ game.away_score }}
+          {% else %}
+              {{ game.away.team_name }} defeat {{ game.home.team_name }} {{ game.away_score }} to {{ game.home_score }}
+          {% endif %}
         </div>
-      </div>
+        <table class="table table-lined auto">
+            <thead>
+                <tr><th>{{ game.away.team_name }} - {{ game.away_score }}</th><th>Stats</th><th>{{ game.home.team_name }} - {{ game.home_score }}</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>{{ game.away_total_yards }}</td><td>Total Yards</td><td>{{ game.home_total_yards }}</td></tr>
+                <tr><td>{{ game.away_passing_yards }}</td><td>Passing Yards</td><td>{{ game.home_passing_yards }}</td></tr>
+                <tr><td>{{ game.away_rushing_yards }}</td><td>Rushing Yards</td><td>{{ game.home_rushing_yards }}</td></tr>
+                <tr><td>{{ game.away_turn_overs }}</td><td>Turnovers</td><td>{{ game.home_turn_overs }}</td></tr>
+                <tr><td>{{ game.away_qbr }}</td><td>QBR</td><td>{{ game.home_qbr }}</td></tr>
+            </tbody>
+        </table>
+        {% endfor %}
     </div>
-    <div class="col-md-3">
-      <div class="divbg">
-          <h1 class="text-center divbgtext">Gazzett</h1>
-      </div>
-      <div>
-        <img src="/static/CAGNFLStatsGazzett-Week3.png" class="img-responsive" id="week3-paper" onmouseover="" style="cursor: pointer;">
-      </div>
-      <br/>
-      <div>
-        <img src="/static/CAGNFLStatsGazzett-Week2.gif" class="img-responsive" id="week2-paper" onmouseover="" style="cursor: pointer;">
-      </div>
+  </div>
+  <div class="col-md-3">
+    <br>
+    <div class="panel-heading divbgtext">
+      <h1 class="divbgtext">Current Season</h1>
     </div>
+    <div class="col-md-12 divbg">
+      <h1 class="divbgtext text-center">
+        Season 50
+      </h1>
   </div>
 </div>
 <script>
-$("#champion").click(function() {
-  $.colorbox({href:"/static/Cag-Champion-Roster.gif"});
-});
 $("#champions-wall").click(function() {
   $.colorbox({href:"/static/DazzoTrophyWall.png"});
-});
-$("#week2-paper").click(function() {
-  $.colorbox({href:"/static/CAGNFLStatsGazzett-Week2.gif"});
-});
-$("#week3-paper").click(function() {
-  $.colorbox({href:"/static/CAGNFLStatsGazzett-Week3.png"});
 });
 </script>
 {% endblock %}

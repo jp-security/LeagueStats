@@ -28,18 +28,19 @@ def team_entry():
 @login_required
 def game_entry():
     form = GameInformation()
+    form.added_by = current_user.id
     last_five = LastFive()
 
     if form.validate_on_submit():
         if form.no_stats.data == 'Yes':
-            NoStats(form.week.data, form.winning_team.data, form.home_team.data, form.home_score.data, form.away_team.data, form.away_score.data)
+            NoStats(form.week.data, form.added_by, form.winning_team.data, form.home_team.data, form.home_score.data, form.away_team.data, form.away_score.data)
         elif form.no_stats.data == 'No':
-            Stats(form.week.data, form.winning_team.data, form.home_team.data, form.home_score.data, form.home_passing_yards.data, form.home_rushing_yards.data,
+            Stats(form.week.data, form.added_by, form.winning_team.data, form.home_team.data, form.home_score.data, form.home_passing_yards.data, form.home_rushing_yards.data,
                     form.home_turn_overs.data, form.home_qbr.data, form.away_team.data, form.away_score.data, form.away_passing_yards.data,
                     form.away_rushing_yards.data, form.away_turn_overs.data, form.away_qbr.data)
         else:
             flash('There were errors submitting the game results')
-        return redirect(url_for('game_entry'))
+        return redirect(url_for('main.game_entry'))
     return render_template('main/gameentry.html', form=form, last_five=last_five)
 
 @main.route('/user/<username>')
@@ -55,9 +56,9 @@ def edit_profile():
     form = EditProfileForm()
     if form.validate_on_submit():
         current_user.name = form.name.data
-        db.session.add(user)
+        db.session.add(current_user)
         flash('Your profile has been updated.')
-        return redirect(url_for('main.user', username=current_user.name))
+        return redirect(url_for('main.user', username=current_user.username))
     form.name.data = current_user.name
     return render_template('main/edit_profile.html', form=form)
 
@@ -84,8 +85,9 @@ def edit_profile_admin(id):
 @main.route('/')
 @main.route('/home')
 def home():
+    last_five = LastFive()
     return render_template('main/index.html',
-                            title="Home")
+                            title="Home", last_five=last_five)
 
 @main.route('/games')
 def games():

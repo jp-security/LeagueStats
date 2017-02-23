@@ -42,7 +42,7 @@ class Role(db.Model):
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
@@ -51,6 +51,8 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(64))
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
+
+    game_entry = db.relationship('Games', back_populates='author')
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -134,6 +136,8 @@ class Games(db.Model):
     __tablename__ = 'games'
     id = db.Column(db.Integer, primary_key=True)
     week = db.Column(db.Integer)
+    added_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+    author = db.relationship('User', back_populates='game_entry')
 
     home_team = db.Column(db.Integer, db.ForeignKey('teams.id'))
     home_score = db.Column(db.Integer)

@@ -55,7 +55,7 @@ def register():
         print token
         flash('A confirmation email has been sent')
         return redirect(url_for('auth.login'))
-    return render_template('registration.html', form=form)
+    return render_template('auth/registration.html', form=form)
 
 @auth.route('/confirm/<token>')
 @login_required

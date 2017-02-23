@@ -28,6 +28,10 @@ th
   position: absolute;
   float: none;
 }
+input.right
+{
+  float: right;
+}
 .text-center
 {
   text-align: center;
