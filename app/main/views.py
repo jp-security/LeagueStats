@@ -9,7 +9,7 @@ from .teamentry import teamAdd
 from . import main
 from .. import db
 import app.models as models
-from app.models import User, Role
+from app.models import User, Role, Permission
 from ..decorators import admin_required, permission_required
 
 active_week = "active"
@@ -26,6 +26,7 @@ def team_entry():
 
 @main.route('/game-entry', methods=['GET', 'POST'])
 @login_required
+@permission_required(Permission.ADDGAMES)
 def game_entry():
     form = GameInformation()
     form.added_by = current_user.id
