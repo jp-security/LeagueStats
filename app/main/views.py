@@ -75,6 +75,7 @@ def edit_profile_admin(id):
         user.confirmed = form.confirmed.data
         user.role = Role.query.get(form.role.data)
         db.session.add(user)
+        db.session.commit()
         flash('The profile has been updated')
         return redirect(url_for('.user', username=user.username))
     form.email.data = user.email
