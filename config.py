@@ -76,7 +76,7 @@ class HerokuConfig(ProductionConfig):
     SSL_DISABLE = bool(os.environ.get('SSL_DISABLE'))
 
 config = {
-    'development': DevelopmentConfig,
+    'default': DevelopmentConfig,
     'testing': TestingConfig,
     'production': ProductionConfig,
     'stats': HerokuConfig
