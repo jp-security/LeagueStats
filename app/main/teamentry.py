@@ -5,10 +5,10 @@ import app.models as models
 def teamAdd():
     teams = [
     {'team_owner': 'Darklord Destro',   'team_city': 'Washington',      'team_name': "91 Redskins",        'division': 'Navy',      'team_wins': '0', 'team_losses': '0'},
-    {'team_owner': 'tjspeaks',          'team_city': 'Baltimore',       'team_name': "67 Colts'",          'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
+    {'team_owner': 'tjspeaks',          'team_city': 'Baltimore',       'team_name': "67 Colts",          'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
     {'team_owner': 'Aquick Assasin',    'team_city': 'Cleveland',       'team_name': "64 Browns",          'division': 'Navy',      'team_wins': '0', 'team_losses': '0'},
     {'team_owner': 'MightyRx',          'team_city': 'New Orleans',     'team_name': "67 Saints",          'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
-    {'team_owner': 'Dazzo47',           'team_city': 'Chicago',         'team_name': "67 Bears",           'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
+    {'team_owner': 'Dazzo47',           'team_city': 'Chicago',         'team_name': "66 Bears",           'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
     {'team_owner': 'SitnHereFlossin',   'team_city': 'Tampa Bay',       'team_name': "99 Bucs",            'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
     {'team_owner': 'Pcat Magoo',        'team_city': 'Kansas City',     'team_name': "90 Chiefs",          'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
     {'team_owner': 'xRun and Sh00tx',   'team_city': 'Houston',         'team_name': "93 Oilers",          'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},
