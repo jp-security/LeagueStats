@@ -49,9 +49,9 @@ class ProductionConfig(Config):
 
         mail_handler = SMTPHandler(
             mailhost = (cls.MAIL_SERVER, cls.MAIL_PORT),
-            fromaddr = cls.FLASKY_MAIL_SENDER,
-            toaddrs = [cls.FLASKY_MAILSENDER],
-            subject = cls.FLASKY_MAIL_SUBJECT_PREFIX + 'Application Error',
+            fromaddr = cls.CAG_MAIL_SENDER,
+            toaddrs = [cls.CAG_MAIL_SENDER],
+            subject = cls.CAG_MAIL_SUBJECT_PREFIX + 'Application Error',
             credentials = credentials,
             secure = secure)
         mail_handler.setLevel(logging.ERROR)
