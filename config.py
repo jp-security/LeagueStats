@@ -30,7 +30,7 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI=('mysql://root:password1@localhost/cagstats')
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI=('DATABASE_URL') or \
+    SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URL') or \
         'mysql://root:password1@localhost/cagstats' + os.path.join(basedir, 'cagstats')
 
     @classmethod
