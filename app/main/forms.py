@@ -1,34 +1,20 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, ValidationError, SelectField, IntegerField, DecimalField, HiddenField
 from wtforms.validators import Required, Email, Length, Regexp, EqualTo, NumberRange
-from ..models import Role, User
+from ..models import Role, User, Teams
 
 class TeamEntry(FlaskForm):
     submit = SubmitField('Add Teams ')
 
 class GameInformation(FlaskForm):
-    teams = [("'91 Redskins", "'91 Redskins"),
-            ("'67 Colts'", "'67 Colts'"),
-            ("'64 Browns", "'64 Browns"),
-            ("'67 Saints", "'67 Saints"),
-            ("'67 Bears", "'67 Bears"),
-            ("'99 Bucs", "'99 Bucs"),
-            ("'90 Chiefs", "'90 Chiefs"),
-            ("'93 Oilers", "'93 Oilers"),
-            ("'98 Broncos", "'98 Broncos"),
-            ("'85 Bears", "'85 Bears"),
-            ("'00 Rams", "'00 Rams"),
-            ("'93 Cowboys", "'93 Cowboys"),
-            ("'50 Eagles", "'50 Eagles")]
-
     no_stats = SelectField('No Stats', choices=[('Yes', 'Yes'), ('No', 'No')], default='No')
     week = IntegerField('Week', validators=[Required(), NumberRange(0, 16)])
     added_by = HiddenField('Added By')
 
-    home_team = SelectField('Home Team', choices=teams)
+    home_team = SelectField('Home Team')
     home_score = IntegerField('Home Score', validators=[Required(), NumberRange(0,100)])
 
-    away_team = SelectField('Away Team', choices=teams)
+    away_team = SelectField('Away Team')
     away_score = IntegerField('Away Score', validators=[Required(), NumberRange(0,100)])
 
     winning_team = SelectField('Winning Team', choices=[('Home', 'Home'), ('Away', 'Away')])
@@ -44,6 +30,14 @@ class GameInformation(FlaskForm):
     away_qbr = DecimalField('Away QBR', validators=[NumberRange(0,159)], default=0)
 
     submit = SubmitField('Add Game')
+
+    def __init__(self, *args, **kwargs):
+        super(GameInformation, self).__init__(*args, **kwargs)
+        self.home_team.choices = [(team.team_name, team_owner)
+                                for team in Teams.query.order_by(Teams.team_name).all()]
+
+        self.away_team.choices = [(team.team_name, team_owner)
+                                for team in Teams.query.order_by(Teams.team_name).all()]
 
 class EditProfileForm(FlaskForm):
     name = StringField('Real Name', validators=[Length(0, 64)])
