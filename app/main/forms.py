@@ -33,10 +33,10 @@ class GameInformation(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(GameInformation, self).__init__(*args, **kwargs)
-        self.home_team.choices = [(team.team_name)
+        self.home_team.choices = [(team.team_name, team.team_name)
                                 for team in Teams.query.order_by(Teams.team_name).all()]
 
-        self.away_team.choices = [(team.team_name)
+        self.away_team.choices = [(team.team_name, team.team_name)
                                 for team in Teams.query.order_by(Teams.team_name).all()]
 
 class EditProfileForm(FlaskForm):
