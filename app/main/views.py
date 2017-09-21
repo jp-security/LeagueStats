@@ -3,7 +3,7 @@ import json
 from flask import render_template, session, redirect, url_for, request, flash
 from flask.ext.login import login_user, logout_user, login_required, current_user
 from .gameentry import NoStats, Stats
-from .database import LastFive
+from .database import LastFive, addTeam
 from .forms import GameInformation, TeamEntry, EditProfileAdminForm, EditProfileForm
 from .teamentry import teamAdd
 from . import main
@@ -20,8 +20,8 @@ active_week = "active"
 def team_entry():
     form = TeamEntry()
     if form.validate_on_submit():
-        teamAdd()
-        return redirect(url_for('main.home'))
+        addTeam(form.team_owner.data, form.team_city.data, form.team_name.data, form.division.data)
+        return redirect(url_for('main.team_entry'))
     return render_template('main/teamentry.html', form=form)
 
 @main.route('/game-entry', methods=['GET', 'POST'])
@@ -83,6 +83,13 @@ def edit_profile_admin(id):
     form.confirmed.data = user.confirmed
     form.role.data = user.role_id
     return render_template('main/edit_profile.html', form=form, user=user)
+
+@main.route('/user-accounts')
+@login_required
+@admin_required
+def user_accounts():
+    users = User.query.get.all()
+    return render_template('main/user_accounts.html', users=users)
 
 @main.route('/')
 @main.route('/home')

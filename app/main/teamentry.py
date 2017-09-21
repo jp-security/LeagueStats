@@ -2,7 +2,7 @@ from . import main
 from .. import db
 import app.models as models
 
-def teamAdd():
+def teamAdd(owner, city, name, division, wins, losses):
     teams = [
     {'team_owner': 'Darklord Destro',   'team_city': 'Washington',      'team_name': "91 Redskins",        'division': 'Navy',      'team_wins': '0', 'team_losses': '0'},
     {'team_owner': 'tjspeaks',          'team_city': 'Baltimore',       'team_name': "67 Colts",          'division': 'Gold',      'team_wins': '0', 'team_losses': '0'},

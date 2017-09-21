@@ -4,7 +4,12 @@ from wtforms.validators import Required, Email, Length, Regexp, EqualTo, NumberR
 from ..models import Role, User, Teams
 
 class TeamEntry(FlaskForm):
-    submit = SubmitField('Add Teams ')
+    team_owner = StringField('Team Owner', validators=[Length(0, 64)])
+    team_city = StringField('Team City', validators=[Length(0, 64)])
+    team_name = StringField('Team Name', validators=[Length(0, 64)])
+    division = SelectField('Division', choices=[('Gold', 'Gold'), ('Navy', 'Navy'), ('None', 'None')])
+
+    submit = SubmitField('Add Team')
 
 class GameInformation(FlaskForm):
     no_stats = SelectField('No Stats', choices=[('Yes', 'Yes'), ('No', 'No')], default='No')
