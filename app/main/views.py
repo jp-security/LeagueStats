@@ -14,6 +14,11 @@ from ..decorators import admin_required, permission_required
 
 active_week = "active"
 
+@main.context_processor
+def userTeams():
+    query = models.Teams.query.all()
+    return dict(teams=query)
+
 @main.route('/team-entry', methods=['GET', 'POST'])
 @login_required
 @admin_required
