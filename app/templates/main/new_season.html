@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="panel panel-default col-md-12 divbg">
+  <div class="panel-heading">
+    <h1 class="text-center divbgtext">Start New Season</h1>
+    <h2 class="text-center divbgtext">This will drop all tables and start a new season</h2>
+  </div>
+  <div class="col-md-4 col-md-offset-4 divbgtext divbg">
+    <br><br>
+    {{ wtf.quick_form(form) }}
+  </div>
+</div>
+
+{% endblock %}

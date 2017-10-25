@@ -51,6 +51,8 @@
                 <a href="*" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="{{ url_for('main.team_entry') }}">Team Entry</a></li>
+                  <li><a href="{{ url_for('main.new_season') }}">New Season</a></li>
+                  <li><a href="{{ url_for('main.stat_rollover') }}">New Season w/ History</a></li>
                 </ul>
               </li>
               {% endif %}

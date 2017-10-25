@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-8 col-md-offset-2 divtable">
+  <table class="table table-lined" id="users">
+    <thead>
+      <th class="sorting">Username</th>
+      <th class="sorting">Edit Profile</th>
+    </thead>
+    {% for user in users %}
+    <tbody>
+      <tr><td>{{ user.username }}</td>
+        <td><a class="btn btn-default" href="{{ url_for('.edit_profile_admin', id=user.id) }}">Edit Profile</a></td></tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+<script>
+$(function(){
+  ('#users').DataTable();
+})
+</script>
+{% endblock %}

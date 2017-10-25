@@ -3,6 +3,12 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, Valid
 from wtforms.validators import Required, Email, Length, Regexp, EqualTo, NumberRange
 from ..models import Role, User, Teams
 
+class NewSeason(FlaskForm):
+    submit = SubmitField('Start New Season')
+
+class NewSeasonHistory(FlaskForm):
+    submit = SubmitField('Start New Season')
+
 class TeamEntry(FlaskForm):
     team_owner = StringField('Team Owner', validators=[Length(0, 64)])
     team_city = StringField('Team City', validators=[Length(0, 64)])

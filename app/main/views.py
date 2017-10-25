@@ -3,8 +3,9 @@ import json
 from flask import render_template, session, redirect, url_for, request, flash
 from flask.ext.login import login_user, logout_user, login_required, current_user
 from .gameentry import NoStats, Stats
-from .database import LastFive, addTeam
+from .database import LastFive, addTeam, newSeason, historicalStats
 from .forms import GameInformation, TeamEntry, EditProfileAdminForm, EditProfileForm
+from .forms import NewSeason, NewSeasonHistory
 from .teamentry import teamAdd
 from . import main
 from .. import db
@@ -19,17 +20,40 @@ def userTeams():
     query = models.Teams.query.all()
     return dict(teams=query)
 
-@main.route('/team-entry', methods=['GET', 'POST'])
+@main.route('/admin/team-entry', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def team_entry():
     form = TeamEntry()
+
     if form.validate_on_submit():
         addTeam(form.team_owner.data, form.team_city.data, form.team_name.data, form.division.data)
         return redirect(url_for('main.team_entry'))
     return render_template('main/teamentry.html', form=form)
 
-@main.route('/game-entry', methods=['GET', 'POST'])
+@main.route('/admin/new-season', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def new_season():
+    form = NewSeason()
+
+    if form.validate_on_submit():
+        newSeason()
+        return redirect(url_for('main.home'))
+    return render_template('main/new_season.html', form=form)
+
+@main.route('/admin/new-season-history', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def stat_rollover():
+    form = NewSeasonHistory()
+
+    if form.validate_on_submit():
+        historicalStats()
+        return redirect(url_for('main.home'))
+    return render_template('main/new_season_history.html', form=form)
+
+@main.route('/admin/game-entry', methods=['GET', 'POST'])
 @login_required
 @permission_required(Permission.ADDGAMES)
 def game_entry():
